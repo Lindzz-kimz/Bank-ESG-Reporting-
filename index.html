@@ -1,1565 +1,1245 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenya Commercial Bank - ESG Reporting & Sustainability Platform</title>
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-    <!-- FontAwesome 6 Icons CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Plus Jakarta Sans & JetBrains Mono Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    colors: {
-                        brand: {
-                            forestDark: '#062b1e',
-                            forestDeep: '#041c14',
-                            forestCard: '#093a29',
-                            forestBorder: '#12543c',
-                            softSage: '#e2ece6',
-                            sageHover: '#d1e3d8',
-                            emeraldAccent: '#10b981',
-                            tealVibrant: '#0ea5e9',
-                            cyanGreen: '#06b6d4',
-                            amberWarm: '#f59e0b',
-                            coralRed: '#f43f5e',
-                            royalIndigo: '#6366f1',
-                            roseAmethyst: '#ec4899',
-                            surfaceWhite: '#ffffff',
-                            slateMuted: '#64748b'
-                        }
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank ESG Reporting & Sustainability Platform | PCAF, KGT, CBK, ISSB & GRI</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              pine: '#062419',
+              dark: '#0A3A2A',
+              card: '#0f4835',
+              sage: '#86B39C',
+              soft: '#EAF3EE',
+              accent: '#10B981',
+              teal: '#0EA5E9',
+              coral: '#F43F5E',
+              amber: '#F59E0B',
+              indigo: '#6366F1'
             }
+          }
         }
-    </script>
-
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f1f6f3;
-            color: #0f172a;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #e2ece6;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #0ea5e9;
-            border-radius: 999px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #0284c7;
-        }
-        .clean-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 18px -2px rgba(9, 58, 41, 0.05);
-            transition: all 0.2s ease-in-out;
-        }
-        .clean-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 8px 24px -4px rgba(9, 58, 41, 0.08);
-        }
-        .tab-btn-active {
-            background-color: #ffffff !important;
-            color: #062b1e !important;
-            font-weight: 700 !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-        }
-        .modal-blur {
-            backdrop-filter: blur(8px);
-            background: rgba(6, 43, 30, 0.7);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #86B39C;
+      border-radius: 9999px;
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-brand-emeraldAccent selection:text-white">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-sage selection:text-white">
 
-    <header class="bg-brand-forestDark text-white border-b border-brand-forestBorder sticky top-0 z-50 px-4 lg:px-8 py-3 shadow-md">
-        <div class="max-w-[1780px] mx-auto flex flex-col xl:flex-row items-start xl:items-center justify-between gap-3">
-            
-            <!-- Left: Geometric Fintech Brand Identity -->
-            <div class="flex items-center gap-3.5 flex-wrap">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-emeraldAccent via-brand-tealVibrant to-brand-royalIndigo flex items-center justify-center shadow-lg shadow-emerald-950/40 p-0.5">
-                    <div class="w-full h-full bg-brand-forestDeep rounded-[14px] flex items-center justify-center">
-                        <svg class="w-5 h-5 text-brand-emeraldAccent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <circle cx="12" cy="12" r="5" stroke-dasharray="2 2"></circle>
-                            <path d="M12 3v4M12 17v4M3 12h4M17 12h4"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="font-extrabold text-base tracking-tight text-white">East Africa Commercial Bank</span>
-                        <span class="text-[10px] bg-brand-forestCard text-brand-emeraldAccent border border-brand-forestBorder px-2 py-0.5 rounded font-mono font-bold">ESG ENTERPRISE CORE</span>
-                    </div>
-                    <p class="text-[11px] text-brand-softSage/80 flex items-center gap-1.5">
-                        <i class="fa-solid fa-building-columns text-brand-tealVibrant text-[10px]"></i> Central Bank of Kenya Regulated · PCAF · KGT · ISSB · GRI Compliant
-                    </p>
-                </div>
-
-                <!-- Department Persona Selector -->
-                <div class="hidden md:flex items-center bg-brand-forestDeep border border-brand-forestBorder rounded-xl px-2.5 py-1 text-xs ml-2">
-                    <span class="w-2 h-2 rounded-full bg-brand-emeraldAccent animate-pulse mr-2"></span>
-                    <span class="text-brand-softSage/70 text-[10px] uppercase font-mono mr-1.5">Persona:</span>
-                    <select id="personaSelector" onchange="handlePersonaChange(this.value)" class="bg-transparent text-xs font-bold text-white outline-none cursor-pointer">
-                        <option value="all" class="bg-brand-forestDark text-white">All Views (Unified Desk)</option>
-                        <option value="credit" class="bg-brand-forestDark text-white">Credit Risk & Analytics (PCAF)</option>
-                        <option value="origination" class="bg-brand-forestDark text-white">Origination & Lending (KGT)</option>
-                        <option value="erm" class="bg-brand-forestDark text-white">ERM (CBK Climate Risk)</option>
-                        <option value="cfo" class="bg-brand-forestDark text-white">CFO & Financial Reporting (ISSB)</option>
-                        <option value="hr" class="bg-brand-forestDark text-white">Operations & HR (GRI Index)</option>
-                    </select>
-                </div>
+  <!-- ================= TOP INSTITUTIONAL BAR ================= -->
+  <header class="bg-brand-pine text-white border-b border-brand-dark sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo & Bank Title -->
+        <div class="flex items-center space-x-3">
+          <!-- Abstract Circular Geometric Emblem (No Leaves) -->
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-accent via-brand-sage to-teal-300 p-0.5 shadow-lg flex items-center justify-center">
+            <div class="w-full h-full bg-brand-pine rounded-[10px] flex items-center justify-center">
+              <svg class="w-6 h-6 text-brand-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <polygon points="12,4 19,16 5,16" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+              </svg>
             </div>
-
-            <!-- Right: Currency, Date, and Global Actions -->
-            <div class="flex items-center gap-2.5 w-full xl:w-auto justify-between xl:justify-end flex-wrap">
-                <!-- Currency Toggle -->
-                <div class="flex items-center bg-brand-forestDeep border border-brand-forestBorder rounded-lg p-0.5 text-xs font-mono">
-                    <button id="curr-kes" onclick="setCurrency('KES')" class="px-2.5 py-1 rounded font-bold bg-brand-emeraldAccent text-brand-forestDark transition">KES (M/B)</button>
-                    <button id="curr-usd" onclick="setCurrency('USD')" class="px-2.5 py-1 rounded font-medium text-brand-softSage hover:text-white transition">USD ($)</button>
-                </div>
-
-                <!-- Reporting Period -->
-                <div class="flex items-center bg-brand-forestDeep border border-brand-forestBorder rounded-lg px-2.5 py-1 text-xs text-white">
-                    <i class="fa-regular fa-calendar-check text-brand-tealVibrant mr-2"></i>
-                    <select id="reportingPeriod" onchange="switchPeriod(this.value)" class="bg-transparent font-medium border-none outline-none cursor-pointer text-white">
-                        <option value="2026-Q3" selected class="bg-brand-forestDark text-white">Q3 2026 (Active YTD)</option>
-                        <option value="2026-FY" class="bg-brand-forestDark text-white">FY 2026 (Forward Plan)</option>
-                        <option value="2025-FY" class="bg-brand-forestDark text-white">FY 2025 (Audited Baseline)</option>
-                    </select>
-                </div>
-
-                <!-- Export Deck -->
-                <button onclick="openExportModal()" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-brand-emeraldAccent to-brand-tealVibrant hover:brightness-110 text-brand-forestDark font-bold px-3 py-1.5 rounded-lg text-xs shadow-md transition transform active:scale-95">
-                    <i class="fa-solid fa-file-arrow-down"></i>
-                    <span>Export Audit Deck</span>
-                </button>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-base tracking-tight text-white">CAPITAL ESG</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-dark text-brand-sage border border-brand-card">CBK & PCAF CERTIFIED</span>
             </div>
+            <p class="text-[11px] text-slate-300">Bank Sustainability & Financed Emissions Management Engine</p>
+          </div>
         </div>
 
-        <!-- 5 Framework Navigation Tabs -->
-        <div class="max-w-[1780px] mx-auto mt-2.5 pt-2 border-t border-brand-forestBorder flex items-center justify-between overflow-x-auto custom-scrollbar gap-2">
-            <div class="flex items-center gap-1.5 shrink-0 py-1" id="frameworkTabBar">
-                <button onclick="switchTab(1)" id="tab-1" class="tab-btn tab-btn-active flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-brand-forestDeep text-brand-softSage">
-                    <span class="w-5 h-5 rounded-full bg-brand-emeraldAccent text-brand-forestDark flex items-center justify-center text-[10px] font-mono font-bold">1</span>
-                    <span>PCAF Financed Emissions</span>
-                </button>
-                <button onclick="switchTab(2)" id="tab-2" class="tab-btn flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-brand-forestDeep text-brand-softSage hover:text-white">
-                    <span class="w-5 h-5 rounded-full bg-brand-tealVibrant text-white flex items-center justify-center text-[10px] font-mono font-bold">2</span>
-                    <span>Kenya Green Taxonomy</span>
-                </button>
-                <button onclick="switchTab(3)" id="tab-3" class="tab-btn flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-brand-forestDeep text-brand-softSage hover:text-white">
-                    <span class="w-5 h-5 rounded-full bg-brand-amberWarm text-brand-forestDark flex items-center justify-center text-[10px] font-mono font-bold">3</span>
-                    <span>CBK Climate Risk Guidance</span>
-                </button>
-                <button onclick="switchTab(4)" id="tab-4" class="tab-btn flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-brand-forestDeep text-brand-softSage hover:text-white">
-                    <span class="w-5 h-5 rounded-full bg-brand-royalIndigo text-white flex items-center justify-center text-[10px] font-mono font-bold">4</span>
-                    <span>ISSB / IFRS S1 & S2</span>
-                </button>
-                <button onclick="switchTab(5)" id="tab-5" class="tab-btn flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-brand-forestDeep text-brand-softSage hover:text-white">
-                    <span class="w-5 h-5 rounded-full bg-brand-roseAmethyst text-white flex items-center justify-center text-[10px] font-mono font-bold">5</span>
-                    <span>GRI & Double Materiality</span>
-                </button>
-            </div>
+        <!-- Global Header Controls: Persona, Currency, Reporting Period -->
+        <div class="hidden lg:flex items-center space-x-3">
+          <!-- Currency Toggle -->
+          <div class="bg-brand-dark p-1 rounded-lg border border-brand-card flex items-center text-xs">
+            <button id="curr-kes" onclick="setCurrency('KES')" class="px-2.5 py-1 rounded font-semibold text-brand-pine bg-brand-sage transition-all">KES</button>
+            <button id="curr-usd" onclick="setCurrency('USD')" class="px-2.5 py-1 rounded font-semibold text-slate-300 hover:text-white transition-all">USD</button>
+          </div>
 
-            <div class="hidden lg:flex items-center gap-2 text-xs font-mono text-brand-softSage bg-brand-forestDeep px-3 py-1 rounded-lg border border-brand-forestBorder shrink-0">
-                <span class="text-brand-slateMuted text-[10px]">OWNER:</span>
-                <span id="activeOwnerLabel" class="font-bold text-brand-emeraldAccent">Credit Risk & Analytics</span>
-            </div>
+          <!-- Reporting Period Selector -->
+          <select id="reporting-period" class="bg-brand-dark text-xs border border-brand-card rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-brand-sage">
+            <option value="2026-H1">Reporting Cycle: FY 2026 (H1 Verified)</option>
+            <option value="2025-FY">Reporting Cycle: FY 2025 (KNBS Audited)</option>
+            <option value="2024-FY">Reporting Cycle: FY 2024 (Historical Baseline)</option>
+          </select>
+
+          <!-- Department Switcher -->
+          <div class="flex items-center space-x-2 bg-brand-dark border border-brand-card rounded-lg px-3 py-1.5">
+            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span class="text-xs text-slate-300">Active Dept:</span>
+            <select id="dept-select" onchange="handleDeptChange(this.value)" class="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer">
+              <option value="risk" class="bg-slate-900">Credit Risk & Analytics</option>
+              <option value="origination" class="bg-slate-900">Origination & Corporate</option>
+              <option value="erm" class="bg-slate-900">Enterprise Risk (ERM)</option>
+              <option value="cfo" class="bg-slate-900">Financial Reporting & CFO</option>
+              <option value="ops" class="bg-slate-900">HR, Ops & Procurement</option>
+            </select>
+          </div>
+
+          <!-- Audit Action Button -->
+          <button onclick="triggerExportAuditReport()" class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-lg text-xs font-semibold shadow flex items-center space-x-1.5 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Audit Package</span>
+          </button>
         </div>
-    </header>
 
-    <section class="max-w-[1780px] mx-auto w-full px-4 lg:px-8 pt-4 pb-1">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            
-            <!-- Metric 1: PCAF Scope 3 -->
-            <div class="clean-card rounded-2xl p-4 border-l-4 border-l-brand-emeraldAccent flex flex-col justify-between">
-                <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
-                    <span class="uppercase font-mono text-[10px]">Scope 3 Financed Emissions</span>
-                    <span class="text-brand-emeraldAccent font-mono text-[11px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                        <i class="fa-solid fa-arrow-down"></i> -3.8% YoY
-                    </span>
-                </div>
-                <div class="my-2">
-                    <div class="text-2xl lg:text-3xl font-extrabold text-slate-900 font-mono tracking-tight" id="ribbon-emissions">
-                        482,150 <span class="text-xs font-sans text-brand-emeraldAccent font-bold">tCO₂e</span>
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
-                        <span>Intensity: <strong class="text-slate-700 font-mono" id="ribbon-intensity">1.96 t/KES M</strong></span>
-                        <span class="font-mono text-brand-emeraldAccent font-bold">PCAF Score 2.74</span>
-                    </div>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-emeraldAccent h-full w-[78%]"></div>
-                </div>
-            </div>
+      </div>
+    </div>
 
-            <!-- Metric 2: Green Asset Ratio (GAR) -->
-            <div class="clean-card rounded-2xl p-4 border-l-4 border-l-brand-tealVibrant flex flex-col justify-between">
-                <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
-                    <span class="uppercase font-mono text-[10px]">Green Asset Ratio (KGT GAR)</span>
-                    <span class="text-brand-tealVibrant font-mono text-[11px] bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
-                        Target: 20.0%
-                    </span>
-                </div>
-                <div class="my-2">
-                    <div class="text-2xl lg:text-3xl font-extrabold text-brand-tealVibrant font-mono tracking-tight" id="ribbon-gar">
-                        18.4% <span class="text-xs font-sans text-slate-500 font-normal">aligned</span>
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
-                        <span>Eligible: <strong class="text-slate-700 font-mono" id="ribbon-eligible">KES 45.8B</strong></span>
-                        <span class="font-mono text-emerald-600 font-bold">DNSH Passed</span>
-                    </div>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-tealVibrant h-full w-[68%]"></div>
-                </div>
-            </div>
+    <!-- Framework Navigation Strip (5 Core Modules) -->
+    <div class="bg-brand-dark border-t border-brand-card/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex space-x-1 overflow-x-auto custom-scrollbar py-1" aria-label="Tabs">
+          <button onclick="switchModule(1)" id="tab-mod-1" class="module-tab active px-3.5 py-2 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-brand-card shadow border-b-2 border-brand-sage">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>1. PCAF Financed Emissions</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-emerald-950/60 text-emerald-300 rounded">Credit Risk</span>
+          </button>
+          <button onclick="switchModule(2)" id="tab-mod-2" class="module-tab px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span>2. Kenya Green Taxonomy</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-sky-950/60 text-sky-300 rounded">Origination</span>
+          </button>
+          <button onclick="switchModule(3)" id="tab-mod-3" class="module-tab px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>3. CBK Climate Risk Guidance</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-amber-950/60 text-amber-300 rounded">ERM</span>
+          </button>
+          <button onclick="switchModule(4)" id="tab-mod-4" class="module-tab px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+            <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+            <span>4. ISSB / IFRS S1 & S2</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-indigo-950/60 text-indigo-300 rounded">CFO Office</span>
+          </button>
+          <button onclick="switchModule(5)" id="tab-mod-5" class="module-tab px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+            <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+            <span>5. GRI Standards & Materiality</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-rose-950/60 text-rose-300 rounded">HR & Ops</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-            <!-- Metric 3: CBK Climate Readiness -->
-            <div class="clean-card rounded-2xl p-4 border-l-4 border-l-brand-amberWarm flex flex-col justify-between">
-                <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
-                    <span class="uppercase font-mono text-[10px]">CBK Climate Readiness</span>
-                    <span class="text-brand-amberWarm font-mono text-[11px] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                        Supervisory 4-Pillar
-                    </span>
-                </div>
-                <div class="my-2">
-                    <div class="text-2xl lg:text-3xl font-extrabold text-brand-amberWarm font-mono tracking-tight" id="ribbon-cbk">
-                        88.8% <span class="text-xs font-sans text-slate-500 font-normal">composite</span>
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
-                        <span>Governance: 95%</span>
-                        <span class="font-mono text-slate-700">ICAAP Integrated</span>
-                    </div>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-amberWarm h-full w-[88%]"></div>
-                </div>
+  <!-- ================= TOP CONSOLIDATED KPI STRIP ================= -->
+  <section class="bg-white border-b border-slate-200 py-3 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+        
+        <!-- KPI 1 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Gross Financed Emissions</div>
+            <div class="text-xl font-bold text-slate-900 mt-0.5" id="kpi-gross-emissions">2,638,324 <span class="text-xs font-normal text-slate-500">tCO₂e</span></div>
+            <div class="text-[11px] text-emerald-600 font-semibold flex items-center mt-0.5">
+              <span>↓ -4.2%</span> <span class="text-slate-400 font-normal ml-1">vs 2025 baseline</span>
             </div>
+          </div>
+          <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">
+            PCAF
+          </div>
+        </div>
 
-            <!-- Metric 4: Net Zero Decarbonization Alignment -->
-            <div class="clean-card rounded-2xl p-4 border-l-4 border-l-brand-royalIndigo flex flex-col justify-between">
-                <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
-                    <span class="uppercase font-mono text-[10px]">Net Zero 2050 Alignment</span>
-                    <span class="text-brand-royalIndigo font-mono text-[11px] bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
-                        SBTi 1.5°C Path
-                    </span>
-                </div>
-                <div class="my-2">
-                    <div class="text-2xl lg:text-3xl font-extrabold text-brand-royalIndigo font-mono tracking-tight" id="ribbon-netzero">
-                        -26.4% <span class="text-xs font-sans text-slate-500 font-normal">vs 2024 Base</span>
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
-                        <span>2030 Interim: 280k t</span>
-                        <span class="font-mono text-emerald-600 font-bold">On Glidepath</span>
-                    </div>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-royalIndigo h-full w-[72%]"></div>
-                </div>
+        <!-- KPI 2 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Kenya Green Taxonomy (GAR)</div>
+            <div class="text-xl font-bold text-slate-900 mt-0.5" id="kpi-gar">18.42% <span class="text-xs font-normal text-slate-500">of book</span></div>
+            <div class="text-[11px] text-sky-600 font-semibold flex items-center mt-0.5">
+              <span>KES 10.96B</span> <span class="text-slate-400 font-normal ml-1">Taxonomy-aligned</span>
             </div>
+          </div>
+          <div class="w-9 h-9 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs">
+            KGT
+          </div>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">CBK Climate Preparedness</div>
+            <div class="text-xl font-bold text-slate-900 mt-0.5">91.4% <span class="text-xs font-normal text-slate-500">Pillar Index</span></div>
+            <div class="text-[11px] text-amber-600 font-semibold flex items-center mt-0.5">
+              <span>Tier 1 ASAL Stress</span> <span class="text-slate-400 font-normal ml-1">Simulated</span>
+            </div>
+          </div>
+          <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs">
+            CBK
+          </div>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">ISSB S2 Net Zero Glidepath</div>
+            <div class="text-xl font-bold text-slate-900 mt-0.5">1.5°C Orderly</div>
+            <div class="text-[11px] text-indigo-600 font-semibold flex items-center mt-0.5">
+              <span>-8.4% variance</span> <span class="text-slate-400 font-normal ml-1">to SBTi curve</span>
+            </div>
+          </div>
+          <div class="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">
+            ISSB
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN MULTI-MODULE BODY ================= -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+
+    <!-- ========================================================================= -->
+    <!-- MODULE 1: PCAF FINANCED EMISSIONS ASSESSMENT (REFINED FROM EXCEL)          -->
+    <!-- ========================================================================= -->
+    <section id="module-1-screen" class="space-y-6">
+      
+      <!-- Module Subheader with Excel Integration Notice -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-800 rounded-full border border-emerald-200">PCAF Scope 3 Cat 15 Engine</span>
+            <span class="text-xs text-slate-500">Reference: KNBS 2025 Economic Statistics & National GHG Inventory</span>
+          </div>
+          <h1 class="text-2xl font-bold text-slate-900 mt-1">Loan & Investment Portfolio Financed Emissions</h1>
+          <p class="text-xs text-slate-600 mt-0.5">
+            Empirical attribution modeling for Bank Portfolios, calibrated directly to your Excel model (<span class="font-mono text-emerald-700 font-semibold">Total Loans: KES 59.54B</span> | <span class="font-mono text-emerald-700 font-semibold">Direct Assets: KES 13.43M</span>).
+          </p>
+        </div>
+
+        <!-- View Switcher: Sector-Level Portfolio vs. Asset-Class Specific -->
+        <div class="flex items-center space-x-2 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+          <button onclick="togglePCAFView('sector')" id="pcaf-btn-sector" class="px-3 py-1.5 rounded-lg font-bold bg-white text-slate-900 shadow-xs transition-all">
+            Sector Portfolio View (KNBS 2025)
+          </button>
+          <button onclick="togglePCAFView('asset')" id="pcaf-btn-asset" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 hover:text-slate-900 transition-all">
+            Direct Asset Classes (7 PCAF Tiers)
+          </button>
+          <button onclick="openIngestionModal()" class="px-3 py-1.5 rounded-lg font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-all flex items-center space-x-1">
+            <span>+ Ingest Facility</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= PCAF SUB-VIEW 1: SECTOR ANALYSIS (KNBS 2025) ================= -->
+      <div id="pcaf-sector-view" class="space-y-6">
+        
+        <!-- Summary Cards for Sector View -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-gradient-to-br from-brand-pine to-brand-dark text-white p-5 rounded-2xl shadow-sm border border-brand-card">
+            <span class="text-xs font-semibold text-brand-sage uppercase tracking-wider">Total Disbursed Sector Exposure</span>
+            <div class="text-2xl font-black mt-1 font-mono" id="sec-total-loans">KES 59,536,466,218</div>
+            <div class="text-xs text-slate-300 mt-2 flex items-center justify-between border-t border-brand-card/80 pt-2">
+              <span>Covered Economic Sectors</span>
+              <span class="font-bold text-white">10 KNBS Categories</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Sector-Level Financed Emissions</span>
+            <div class="text-2xl font-black text-slate-900 mt-1 font-mono" id="sec-total-emissions">949,507 <span class="text-sm font-normal text-slate-500">tCO₂e</span></div>
+            <div class="text-xs text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+              <span>Carbon Intensity of Sector Book</span>
+              <span class="font-bold text-emerald-600 font-mono">15.95 tCO₂e / KES M</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">PCAF Sector Attribution Ratio</span>
+            <div class="text-2xl font-black text-slate-900 mt-1 font-mono">0.45% <span class="text-sm font-normal text-slate-500">avg exposure</span></div>
+            <div class="text-xs text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+              <span>Data Quality Score (PCAF)</span>
+              <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px]">Tier 4 (Economic Model)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid for Sector View -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Main Chart: Exposure vs Emissions -->
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="font-bold text-slate-900 text-sm">Sector Allocation vs. Financed Carbon Footprint</h3>
+                <p class="text-xs text-slate-500">Bank Loan Balance (KES M) vs. Calculated Financed Emissions (tCO₂e)</p>
+              </div>
+              <span class="text-[11px] font-mono bg-slate-100 px-2 py-1 rounded text-slate-600">KNBS 2025 Baseline</span>
+            </div>
+            <div class="h-72">
+              <canvas id="sectorComparisonChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Donut: Sector Loan Portfolio Share -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Portfolio Sector Concentration</h3>
+              <p class="text-xs text-slate-500 mb-3">% of KES 59.54B Disbursed Portfolio</p>
+              <div class="h-56 relative">
+                <canvas id="sectorShareDonut"></canvas>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-500 text-center mt-2 bg-slate-50 p-2 rounded-lg border border-slate-100">
+              Top 2 Exposures: <strong class="text-slate-800">Trade (36.3%)</strong> & <strong class="text-slate-800">Manufacturing (24.5%)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Complete Sector Analysis Table (From Excel Sheet: Sector Analysis) -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">KNBS 2025 Sector-Level Exposure & Financed Emissions Ledger</h3>
+              <p class="text-xs text-slate-500">Attribution Factor = (Bank Loan Amount) ÷ (Industry Exposure / KNBS 2025 Sector Value)</p>
+            </div>
+            <button onclick="exportSectorTableCSV()" class="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg text-xs font-semibold text-slate-700 shadow-xs">
+              Export CSV
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100/70 text-slate-600 border-b border-slate-200 uppercase tracking-wider text-[10px]">
+                  <th class="py-3 px-4 font-bold">Sector</th>
+                  <th class="py-3 px-4 font-bold">% Portfolio</th>
+                  <th class="py-3 px-4 font-bold">Bank Exposure (KES)</th>
+                  <th class="py-3 px-4 font-bold">Industry Value (KNBS 2025)</th>
+                  <th class="py-3 px-4 font-bold">Attribution Factor</th>
+                  <th class="py-3 px-4 font-bold">Annual Sector Emissions</th>
+                  <th class="py-3 px-4 font-bold">Financed Emissions (tCO₂e)</th>
+                  <th class="py-3 px-4 font-bold text-right">Data Quality</th>
+                </tr>
+              </thead>
+              <tbody id="sector-table-body" class="divide-y divide-slate-100 text-slate-700 font-mono">
+                <!-- Dynamically populated from JS -->
+              </tbody>
+              <tfoot class="bg-emerald-50/50 font-bold border-t-2 border-emerald-200 text-slate-900 text-xs">
+                <tr>
+                  <td class="py-3 px-4 font-bold uppercase">TOTAL PORTFOLIO</td>
+                  <td class="py-3 px-4">100.0%</td>
+                  <td class="py-3 px-4 font-mono" id="sec-foot-loan">KES 59,536,466,218</td>
+                  <td class="py-3 px-4 font-mono">KES 13,383,230,000,000</td>
+                  <td class="py-3 px-4 font-mono">0.4449%</td>
+                  <td class="py-3 px-4 font-mono">128,150,000 tCO₂e</td>
+                  <td class="py-3 px-4 font-mono text-emerald-800" id="sec-foot-emissions">949,507 tCO₂e</td>
+                  <td class="py-3 px-4 text-right"><span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 text-[10px]">PCAF Score 4.0</span></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= PCAF SUB-VIEW 2: ASSET-CLASS SPECIFIC LEDGER (7 EXCEL TIERS) ================= -->
+      <div id="pcaf-asset-view" class="space-y-6 hidden">
+        
+        <!-- Summary Cards for Direct Asset Classes -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+            <span class="text-[11px] font-semibold text-slate-500 uppercase">Direct Facility Balance</span>
+            <div class="text-xl font-bold text-slate-900 mt-1 font-mono">KES 13,430,000</div>
+            <div class="text-xs text-slate-500 mt-1">7 Dedicated Credit Classes</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+            <span class="text-[11px] font-semibold text-slate-500 uppercase">Direct Financed Footprint</span>
+            <div class="text-xl font-bold text-emerald-700 mt-1 font-mono">2,623,334 <span class="text-xs font-normal">tCO₂e</span></div>
+            <div class="text-xs text-slate-500 mt-1">Includes Sovereign & Corporate</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+            <span class="text-[11px] font-semibold text-slate-500 uppercase">Net Sequestration (Project)</span>
+            <div class="text-xl font-bold text-teal-600 mt-1 font-mono">-650 <span class="text-xs font-normal">tCO₂e</span></div>
+            <div class="text-xs text-slate-500 mt-1">Tree Planting & Carbon Sinks</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+            <span class="text-[11px] font-semibold text-slate-500 uppercase">PCAF Data Quality Avg</span>
+            <div class="text-xl font-bold text-amber-600 mt-1 font-mono">2.4 / 5.0</div>
+            <div class="text-xs text-slate-500 mt-1">Primary Activity & EPC Data</div>
+          </div>
+        </div>
+
+        <!-- 7 PCAF Asset Categories Grid (From Excel Worksheets) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <!-- Category 1: Business Loans & Unlisted Equity -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-[10px] font-bold rounded">Category 1</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 2.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Business Loans & Unlisted Equity</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: Loan ÷ (Total Equity + Debt) × Scope 1-3 Emissions</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Borrower:</span> <strong class="text-slate-800">XYZ Manufacturing</strong></div>
+                <div class="flex justify-between"><span>Loan Amount:</span> <span>KES 1,000,000</span></div>
+                <div class="flex justify-between"><span>Total Equity + Debt:</span> <span>KES 4,000,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-blue-700 font-bold">25.0%</span></div>
+                <div class="flex justify-between"><span>Scope 1,2 & 3:</span> <span>6,000,000 tCO₂e</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Emissions:</span>
+              <span class="font-bold text-slate-900 font-mono">1,500,000 tCO₂e</span>
+            </div>
+          </div>
+
+          <!-- Category 2: Listed Equity & Corporate Bonds -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-[10px] font-bold rounded">Category 2</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 1.0 (Audited)</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Listed Equity & Corporate Bonds</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: Investment Amount ÷ EVIC × Reported Scope 1-3</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Asset Name:</span> <strong class="text-slate-800">Safaricom PLC</strong></div>
+                <div class="flex justify-between"><span>Investment Amount:</span> <span>KES 1,000,000</span></div>
+                <div class="flex justify-between"><span>EVIC / Value:</span> <span>KES 500,000,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-indigo-700 font-bold">0.20%</span></div>
+                <div class="flex justify-between"><span>Scope 1,2 & 3:</span> <span>65,000 tCO₂e</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Emissions:</span>
+              <span class="font-bold text-slate-900 font-mono">130 tCO₂e</span>
+            </div>
+          </div>
+
+          <!-- Category 3: Commercial Real Estate -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded">Category 3</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 2.5</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Commercial Real Estate</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: Loan Bal ÷ Property Value × Energy & Floor Activity</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Property:</span> <strong class="text-slate-800">ABC Commercial Building</strong></div>
+                <div class="flex justify-between"><span>Loan Balance:</span> <span>KES 5,000,000</span></div>
+                <div class="flex justify-between"><span>Original Value:</span> <span>KES 10,000,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-emerald-700 font-bold">50.0%</span></div>
+                <div class="flex justify-between"><span>Area / kWh:</span> <span>2,000 sq ft / 300k kWh</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Emissions:</span>
+              <span class="font-bold text-slate-900 font-mono">0.0 tCO₂e (Zero-Net Verified)</span>
+            </div>
+          </div>
+
+          <!-- Category 4: Motor Vehicle Loans -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded">Category 4</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 3.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Motor Vehicle Loans</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: Loan Bal ÷ Total Cost × Vehicle Fuel Emissions</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Vehicle Asset:</span> <strong class="text-slate-800">Commercial Truck-01</strong></div>
+                <div class="flex justify-between"><span>Loan Balance:</span> <span>KES 30,000</span></div>
+                <div class="flex justify-between"><span>Total Cost:</span> <span>KES 45,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-amber-700 font-bold">66.67%</span></div>
+                <div class="flex justify-between"><span>Fuel & Mileage:</span> <span>Diesel / 30,000 KM</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Emissions:</span>
+              <span class="font-bold text-slate-900 font-mono">3,333.33 tCO₂e</span>
+            </div>
+          </div>
+
+          <!-- Category 5: Residential Mortgages -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-teal-100 text-teal-800 text-[10px] font-bold rounded">Category 5</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 3.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Residential Mortgages</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: Loan Outstanding ÷ Property Value × EPC Energy Rate</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Loan Identifier:</span> <strong class="text-slate-800">MTG 101</strong></div>
+                <div class="flex justify-between"><span>Outstanding Amount:</span> <span>KES 400,000</span></div>
+                <div class="flex justify-between"><span>Original Value:</span> <span>KES 500,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-teal-700 font-bold">80.0%</span></div>
+                <div class="flex justify-between"><span>EPC Rating / Emis:</span> <span>Grade B / 30.2 tCO₂e</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Emissions:</span>
+              <span class="font-bold text-slate-900 font-mono">24.16 tCO₂e</span>
+            </div>
+          </div>
+
+          <!-- Category 6: Project Finance (Carbon Removal) -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold rounded">Category 6</span>
+                <span class="text-[10px] font-semibold text-slate-400">PCAF Score 2.0</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mt-2">Project Finance (Sequestration)</h4>
+              <p class="text-xs text-slate-500 mt-1">Formula: -(Investment ÷ EVIC) × Verified Carbon Removal</p>
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                <div class="flex justify-between"><span>Project Name:</span> <strong class="text-slate-800">Tree Planting & Agroforestry</strong></div>
+                <div class="flex justify-between"><span>Investment Amount:</span> <span>KES 5,000,000</span></div>
+                <div class="flex justify-between"><span>Total Valuation:</span> <span>KES 500,000,000</span></div>
+                <div class="flex justify-between"><span>Attribution:</span> <span class="text-green-700 font-bold">-1.0%</span></div>
+                <div class="flex justify-between"><span>Removal Factor:</span> <span>65,000 tCO₂e</span></div>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
+              <span class="text-slate-500">Financed Impact:</span>
+              <span class="font-bold text-green-700 font-mono">-650.0 tCO₂e (Sink)</span>
+            </div>
+          </div>
+
+          <!-- Category 7: Sovereign Debt -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between md:col-span-2 lg:col-span-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <div class="flex items-center space-x-2">
+                  <span class="px-2 py-0.5 bg-purple-100 text-purple-800 text-[10px] font-bold rounded">Category 7</span>
+                  <span class="text-xs font-bold text-slate-900">Sovereign Debt & Treasury Bonds</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">Formula: Investment Amount ÷ Total Bond Value × Country Territorial Emissions</p>
+                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-3 space-y-1 text-xs font-mono">
+                  <div class="flex justify-between"><span>Sovereign Issuer:</span> <strong class="text-slate-800">Sovereign Bond (Turkey)</strong></div>
+                  <div class="flex justify-between"><span>Investment Amount:</span> <span>KES 1,000,000</span></div>
+                  <div class="flex justify-between"><span>Total Issuance Value:</span> <span>KES 500,000,000</span></div>
+                  <div class="flex justify-between"><span>Attribution Factor:</span> <span class="text-purple-700 font-bold">0.20%</span></div>
+                </div>
+              </div>
+              <div class="flex flex-col justify-between">
+                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-100 space-y-1 text-xs font-mono">
+                  <div class="flex justify-between"><span>Country Territorial Emissions:</span> <span>560,248,300 tCO₂e</span></div>
+                  <div class="flex justify-between"><span>PCAF Quality Score:</span> <span class="text-amber-700 font-bold">Tier 3 (Territorial Inventory)</span></div>
+                  <div class="flex justify-between border-t border-slate-200 pt-1 mt-1 font-bold text-slate-900">
+                    <span>Financed Footprint:</span>
+                    <span class="text-purple-800">1,120,496.6 tCO₂e</span>
+                  </div>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-2">
+                  Compliant with PCAF Sovereign Debt Standard (Standard Part B).
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
+
+      </div>
+
     </section>
 
-    <main class="max-w-[1780px] mx-auto w-full px-4 lg:px-8 py-3 space-y-5 flex-1">
+    <!-- ========================================================================= -->
+    <!-- MODULE 2: KENYA GREEN TAXONOMY (KGT) FRAMEWORK SCREEN                      -->
+    <!-- ========================================================================= -->
+    <section id="module-2-screen" class="space-y-6 hidden">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-sky-100 text-sky-800 rounded-full border border-sky-200">Kenya Green Taxonomy Standard</span>
+            <span class="text-xs text-slate-500">Lead Dept: Origination & Corporate Relationship Teams</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Green Asset Ratio (GAR) & Taxonomy Screener</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Evaluating credit deals against KGT 6 Environmental Objectives and Do No Significant Harm (DNSH) rules.</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="bg-sky-50 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-mono">
+            <span class="text-slate-600">Total Book GAR:</span> <strong class="text-sky-700 text-sm">18.42%</strong>
+          </div>
+        </div>
+      </div>
 
-        <!-- ========================================================================= -->
-        <!-- MODULE 1: PCAF FINANCED EMISSIONS ASSESSMENT ENGINE                      -->
-        <!-- ========================================================================= -->
-        <div id="module-view-1" class="module-view space-y-4">
+      <!-- KGT Interactive Deal Screener Card -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+            <span>Origination Deal Screener</span>
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Borrower / Deal Name</label>
+              <input type="text" id="kgt-deal-name" placeholder="e.g., Lake Turkana Wind Expansion" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">KGT Environmental Objective</label>
+              <select id="kgt-deal-obj" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+                <option>1. Climate Change Mitigation</option>
+                <option>2. Climate Change Adaptation</option>
+                <option>3. Sustainable Water & Marine Resources</option>
+                <option>4. Circular Economy & Waste Recovery</option>
+                <option>5. Pollution Prevention & Control</option>
+                <option>6. Protection of Healthy Ecosystems</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Proposed Facility Amount (KES M)</label>
+              <input type="number" id="kgt-deal-val" placeholder="e.g., 250" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+            </div>
             
-            <!-- Module Header Banner -->
-            <div class="clean-card rounded-2xl p-4 bg-gradient-to-r from-emerald-50/70 via-white to-white border-l-4 border-l-brand-emeraldAccent flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-emeraldAccent text-white uppercase">Module 1 · PCAF Scope 3 Cat 15</span>
-                        <span class="text-xs text-slate-600 font-medium">Credit Risk & Portfolio Analytics Department</span>
-                    </div>
-                    <h2 class="text-base font-bold text-slate-900 mt-1">PCAF Credit Asset Categorization & Data Quality Engine</h2>
-                    <p class="text-xs text-slate-600">Calculates financed emissions across 3 mandated asset classes with real-time attribution factors and PCAF score calibration (1 to 5).</p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="openIngestionModal()" class="px-3.5 py-2 bg-brand-emeraldAccent hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus-circle"></i>
-                        <span>Ingest Credit Facility</span>
-                    </button>
-                    <button onclick="exportCSV()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl border border-slate-300 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-file-csv text-emerald-600"></i>
-                        <span>Export CSV</span>
-                    </button>
-                </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <span class="font-semibold text-slate-700 block">KGT Compliance Verification:</span>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" id="chk-sc" class="rounded text-sky-600">
+                <span>Meets Technical Screening Criteria (SC)</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" id="chk-dnsh" class="rounded text-sky-600">
+                <span>Do No Significant Harm (DNSH) verified</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" id="chk-mss" class="rounded text-sky-600">
+                <span>Minimum Social Safeguards (Labor laws)</span>
+              </label>
             </div>
 
-            <!-- The 3 Credit Asset Categorizations (PCAF Standard) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-                
-                <!-- Category A -->
-                <div class="clean-card rounded-2xl p-4 border-t-4 border-t-brand-tealVibrant space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-brand-tealVibrant uppercase">Category A · Corporate & Listed Debt</span>
-                        <span class="text-[10px] bg-sky-50 text-brand-tealVibrant px-2 py-0.5 rounded font-mono font-semibold">54.2% Book</span>
-                    </div>
-                    <div class="text-sm font-bold text-slate-900">EVIC Attribution Formula</div>
-                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-700">
-                        $$\text{Attr} = \frac{\text{Outstanding Balance}}{\text{EVIC (Equity + Debt)}}$$
-                        <div class="text-brand-tealVibrant font-semibold mt-1">Financed = Attr × (Scope 1 + Scope 2)</div>
-                    </div>
-                    <p class="text-[11px] text-slate-500">For Nairobi Securities Exchange (NSE) listed entities and large commercial syndicates with published EVIC financials.</p>
-                </div>
-
-                <!-- Category B -->
-                <div class="clean-card rounded-2xl p-4 border-t-4 border-t-brand-emeraldAccent space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-brand-emeraldAccent uppercase">Category B · SME Commercial Loans</span>
-                        <span class="text-[10px] bg-emerald-50 text-brand-emeraldAccent px-2 py-0.5 rounded font-mono font-semibold">31.4% Book</span>
-                    </div>
-                    <div class="text-sm font-bold text-slate-900">Balance Sheet Asset Ratio & Turnover Proxy</div>
-                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-700">
-                        $$\text{Attr} = \frac{\text{Outstanding Loan}}{\text{Total Balance Sheet Assets}}$$
-                        <div class="text-brand-emeraldAccent font-semibold mt-1">Financed = Attr × Rev × Factor<sub>sector</sub></div>
-                    </div>
-                    <p class="text-[11px] text-slate-500">For private Kenyan SMEs. In the absence of primary GHG records, sector turnover carbon intensity proxies are deployed.</p>
-                </div>
-
-                <!-- Category C -->
-                <div class="clean-card rounded-2xl p-4 border-t-4 border-t-brand-amberWarm space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-brand-amberWarm uppercase">Category C · Asset Finance & Mortgages</span>
-                        <span class="text-[10px] bg-amber-50 text-brand-amberWarm px-2 py-0.5 rounded font-mono font-semibold">14.4% Book</span>
-                    </div>
-                    <div class="text-sm font-bold text-slate-900">Collateral Physical Activity</div>
-                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 font-mono text-[11px] text-slate-700">
-                        $$\text{Attr} = \frac{\text{Outstanding Loan}}{\text{Asset Origination Valuation}}$$
-                        <div class="text-brand-amberWarm font-semibold mt-1">Mortgages: kWh/m² · Vehicles: Fuel / Km</div>
-                    </div>
-                    <p class="text-[11px] text-slate-500">Evaluates physical collateral: building floor area with grid emission factors, and commercial transport fleets based on mileage.</p>
-                </div>
-
-            </div>
-
-            <!-- Charts Row: Sector Financed Emissions & PCAF Quality Score -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                <div class="lg:col-span-7 clean-card rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-emeraldAccent"></span>
-                            <h3 class="text-xs font-bold text-slate-900 tracking-wide uppercase">Financed Emissions by Sector (tCO₂e) vs Decarbonization Cap</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500">PCAF Cat 15</span>
-                    </div>
-                    <div class="relative w-full h-[260px]">
-                        <canvas id="chart-pcaf-sector"></canvas>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 clean-card rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-amberWarm"></span>
-                            <h3 class="text-xs font-bold text-slate-900 tracking-wide uppercase">PCAF Data Quality Distribution (Tiers 1 to 5)</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-emerald-600 font-bold">Target: &le; 2.50</span>
-                    </div>
-                    <div class="relative w-full h-[260px]">
-                        <canvas id="chart-pcaf-quality"></canvas>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Live Facility Assessment Ledger Table -->
-            <div class="clean-card rounded-2xl p-4 space-y-3">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-2.5">
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-900 uppercase flex items-center gap-2">
-                            <i class="fa-solid fa-table-list text-brand-emeraldAccent"></i>
-                            <span>Portfolio Facility Assessment Ledger</span>
-                        </h3>
-                        <p class="text-[11px] text-slate-500">Granular accounts scored and attributed under PCAF methodology.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" id="facilitySearch" oninput="renderFacilitiesTable()" placeholder="Search facility, borrower or sector..." class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-brand-emeraldAccent">
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full text-left text-xs border-collapse font-sans">
-                        <thead>
-                            <tr class="border-b border-slate-200 text-[10px] text-slate-400 uppercase font-mono">
-                                <th class="p-2.5">Facility ID</th>
-                                <th class="p-2.5">Borrower Entity</th>
-                                <th class="p-2.5">Sector</th>
-                                <th class="p-2.5 text-right">EAD (<span class="curr-unit">KES M</span>)</th>
-                                <th class="p-2.5 text-center">Category</th>
-                                <th class="p-2.5 text-right">Attribution %</th>
-                                <th class="p-2.5 text-right">Financed (tCO₂e)</th>
-                                <th class="p-2.5 text-center">PCAF Score</th>
-                                <th class="p-2.5">Approving Desk</th>
-                            </tr>
-                        </thead>
-                        <tbody id="facilityTableBody" class="divide-y divide-slate-100 font-mono text-[11px]">
-                            <!-- Populated via JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+            <button onclick="runKGTScreening()" class="w-full py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold transition-all">
+              Evaluate Deal Alignment
+            </button>
+          </div>
         </div>
 
-        <!-- ========================================================================= -->
-        <!-- MODULE 2: KENYA GREEN TAXONOMY (KGT) FRAMEWORK                            -->
-        <!-- ========================================================================= -->
-        <div id="module-view-2" class="module-view hidden space-y-4">
-            
-            <div class="clean-card rounded-2xl p-4 bg-gradient-to-r from-sky-50/70 via-white to-white border-l-4 border-l-brand-tealVibrant flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-tealVibrant text-white uppercase">Module 2 · Kenya Green Taxonomy (KGT)</span>
-                        <span class="text-xs text-slate-600 font-medium">Origination & Commercial Relationship Teams</span>
-                    </div>
-                    <h2 class="text-base font-bold text-slate-900 mt-1">Kenya Green Taxonomy Alignment & Interactive Deal Screener</h2>
-                    <p class="text-xs text-slate-600">Assesses loans against Central Bank of Kenya Green Taxonomy objectives, technical screening criteria (TSC), and DNSH safeguards.</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Current Green Asset Ratio</span>
-                    <span class="text-xl font-extrabold text-brand-tealVibrant font-mono" id="kgt-gar-badge">18.4% Aligned</span>
-                </div>
+        <!-- Taxonomy Objective Breakdown Chart -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h3 class="font-bold text-slate-900 text-sm">Taxonomy Aligned Portfolio by Objective</h3>
+                <p class="text-xs text-slate-500">Eligible vs Aligned Deals (KES Billions)</p>
+              </div>
+              <span class="text-[11px] font-mono bg-sky-50 text-sky-800 px-2 py-1 rounded">KGT Version 1.0</span>
             </div>
-
-            <!-- KGT Objectives & Interactive Deal Screener Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                <!-- Deal Screener Gateway -->
-                <div class="lg:col-span-7 clean-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-filter-circle-dollar text-brand-tealVibrant"></i>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Interactive KGT Loan Deal Screener</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-brand-tealVibrant font-bold">Deal Evaluation</span>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                        <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Project / Facility Name</label>
-                            <input type="text" id="deal-name" value="Menengai Geothermal Wellhead IV" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-800">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Facility Amount (KES M)</label>
-                            <input type="number" id="deal-amount" value="1250" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-800 font-mono">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">KGT Eligible Sector</label>
-                            <select id="deal-sector" onchange="evaluateKgtDeal()" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-800">
-                                <option value="energy">Renewable Energy (Solar/Geothermal/Wind)</option>
-                                <option value="agri">Climate-Smart Agriculture & Irrigation</option>
-                                <option value="building">Green Buildings (EDGE / LEED Standard)</option>
-                                <option value="transport">Electric Mobility & E-Buses</option>
-                                <option value="water">Sustainable Water Treatment & Supply</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 3-Step Verification Checklist -->
-                    <div class="space-y-2.5 pt-1">
-                        <div class="text-[11px] font-bold text-slate-700 uppercase font-mono">KGT 3-Step Verification Criteria</div>
-                        
-                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                            <label class="flex items-start gap-2.5 text-xs text-slate-800 cursor-pointer">
-                                <input type="checkbox" id="chk-tsc" checked onchange="evaluateKgtDeal()" class="mt-0.5 rounded text-brand-tealVibrant">
-                                <div>
-                                    <span class="font-bold text-slate-900">1. Substantial Contribution (SC) Technical Screening Criteria</span>
-                                    <p class="text-[11px] text-slate-500">Activity generates under 100 g CO₂e/kWh or achieves verified 30%+ energy efficiency gain.</p>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                            <label class="flex items-start gap-2.5 text-xs text-slate-800 cursor-pointer">
-                                <input type="checkbox" id="chk-dnsh" checked onchange="evaluateKgtDeal()" class="mt-0.5 rounded text-brand-tealVibrant">
-                                <div>
-                                    <span class="font-bold text-slate-900">2. Do No Significant Harm (DNSH) across other 5 Objectives</span>
-                                    <p class="text-[11px] text-slate-500">Verification confirms no adverse impacts on local biodiversity, water basins, or land erosion.</p>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                            <label class="flex items-start gap-2.5 text-xs text-slate-800 cursor-pointer">
-                                <input type="checkbox" id="chk-mss" checked onchange="evaluateKgtDeal()" class="mt-0.5 rounded text-brand-tealVibrant">
-                                <div>
-                                    <span class="font-bold text-slate-900">3. Minimum Social Safeguards (MSS)</span>
-                                    <p class="text-[11px] text-slate-500">Compliance with Kenya Employment Act 2007, ILO standards, and community engagement guidelines.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Screen Result Banner -->
-                    <div id="kgt-status-banner" class="p-3 rounded-xl bg-emerald-50 border border-emerald-300 flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
-                            <div>
-                                <span class="text-[10px] font-mono uppercase text-emerald-700 font-bold block">Taxonomy Screener Decision</span>
-                                <span class="text-xs font-bold text-slate-900" id="kgt-status-text">KGT Fully Aligned (Eligible for Green Asset Ratio)</span>
-                            </div>
-                        </div>
-                        <button onclick="commitKgtDeal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition">
-                            Tag in Portfolio
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 6 Environmental Objectives Polar Breakdown -->
-                <div class="lg:col-span-5 clean-card rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-tealVibrant"></span>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Green Book by 6 KGT Environmental Objectives</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500">KES 45.8B Aligned</span>
-                    </div>
-                    <div class="relative w-full h-[280px]">
-                        <canvas id="chart-kgt-objectives"></canvas>
-                    </div>
-                </div>
-
+            <div class="h-64">
+              <canvas id="kgtChart"></canvas>
             </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs mt-3 pt-3 border-t border-slate-100">
+            <div class="p-2 bg-slate-50 rounded-lg"><div class="text-slate-400">Total Screened</div><strong class="text-slate-800">KES 14.2B</strong></div>
+            <div class="p-2 bg-emerald-50 rounded-lg"><div class="text-emerald-700">Aligned (GAR)</div><strong class="text-emerald-800">KES 10.96B</strong></div>
+            <div class="p-2 bg-amber-50 rounded-lg"><div class="text-amber-700">DNSH Pending</div><strong class="text-amber-800">KES 3.24B</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ========================================================================= -->
+    <!-- MODULE 3: CBK CLIMATE RISK GUIDANCE SCREEN                                 -->
+    <!-- ========================================================================= -->
+    <section id="module-3-screen" class="space-y-6 hidden">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-amber-100 text-amber-800 rounded-full border border-amber-200">CBK Guidance on Climate-Related Risks</span>
+            <span class="text-xs text-slate-500">Lead Dept: Enterprise Risk Management (ERM)</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Supervisory Risk Preparedness & Physical Stress Testing</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Physical hazard mapping across Kenya counties & carbon transition capital adequacy stress testing.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- CBK 4-Pillar Tracker -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm">CBK Supervisory 4 Pillars Progress</h3>
+          <div class="space-y-3 text-xs">
+            <div>
+              <div class="flex justify-between mb-1 font-semibold"><span>Pillar 1: Governance & Board Oversight</span><span class="text-emerald-600">95%</span></div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[95%]"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 font-semibold"><span>Pillar 2: Strategy & Business Model</span><span class="text-emerald-600">90%</span></div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[90%]"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 font-semibold"><span>Pillar 3: Risk Management Framework</span><span class="text-amber-600">88%</span></div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-[88%]"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 font-semibold"><span>Pillar 4: Metrics & Targets Disclosures</span><span class="text-emerald-600">92%</span></div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[92%]"></div></div>
+            </div>
+          </div>
+
+          <!-- Carbon Tax Stress Slider -->
+          <div class="pt-3 border-t border-slate-100">
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-xs font-bold text-slate-800">Carbon Price Transition Shock</label>
+              <span id="tax-val" class="font-mono text-xs font-bold text-amber-600">$50 / tCO₂e</span>
+            </div>
+            <input type="range" id="tax-slider" min="10" max="150" step="5" value="50" oninput="updateStressTest(this.value)" class="w-full accent-amber-500">
+            <div class="flex justify-between text-[10px] text-slate-400 mt-1"><span>$10/t</span><span>$75/t (CBK Core)</span><span>$150/t</span></div>
+          </div>
+
+          <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs space-y-1">
+            <div class="flex justify-between text-slate-600"><span>Projected NPL Jump:</span> <strong id="stress-npl" class="text-amber-800">+1.85%</strong></div>
+            <div class="flex justify-between text-slate-600"><span>Required Capital Buffer:</span> <strong id="stress-cap" class="text-amber-800">KES 820M</strong></div>
+          </div>
         </div>
 
-        <!-- ========================================================================= -->
-        <!-- MODULE 3: CENTRAL BANK OF KENYA (CBK) CLIMATE RISK GUIDANCE              -->
-        <!-- ========================================================================= -->
-        <div id="module-view-3" class="module-view hidden space-y-4">
-            
-            <div class="clean-card rounded-2xl p-4 bg-gradient-to-r from-amber-50/70 via-white to-white border-l-4 border-l-brand-amberWarm flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-amberWarm text-white uppercase">Module 3 · CBK Climate Risk Guidance</span>
-                        <span class="text-xs text-slate-600 font-medium">Enterprise Risk Management (ERM) & Credit Committee</span>
-                    </div>
-                    <h2 class="text-base font-bold text-slate-900 mt-1">Supervisory Compliance & Dynamic Carbon Price Transition Stress Tester</h2>
-                    <p class="text-xs text-slate-600">Monitors the 4 CBK supervisory pillars, Kenyan county physical hazards, and stress-tests portfolio NPL jump under carbon tax shocks.</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Pillars Composite Score</span>
-                    <span class="text-xl font-extrabold text-brand-amberWarm font-mono">88.8% Compliant</span>
-                </div>
+        <!-- Regional Physical Risk Vulnerability -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Kenyan County Physical Climate Hazard Vulnerability</h3>
+              <p class="text-xs text-slate-500">Credit exposure at risk from severe drought, floods, and coastal inundation</p>
             </div>
+            <span class="text-xs font-mono bg-slate-100 px-2.5 py-1 rounded text-slate-600">Kenya ASAL Exposure</span>
+          </div>
+          <div class="h-64">
+            <canvas id="cbkRiskChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- 4 Guidance Pillars Progress -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <div class="clean-card rounded-xl p-3 border-t-2 border-t-emerald-500">
-                    <div class="flex justify-between items-center text-xs text-slate-600">
-                        <span class="font-bold">1. Governance</span>
-                        <span class="font-mono text-emerald-600 font-bold">95%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
-                        <div class="bg-emerald-500 h-full w-[95%]"></div>
-                    </div>
-                    <span class="text-[10px] text-slate-400 mt-1 block">Board charter enacted</span>
-                </div>
-                <div class="clean-card rounded-xl p-3 border-t-2 border-t-emerald-500">
-                    <div class="flex justify-between items-center text-xs text-slate-600">
-                        <span class="font-bold">2. Strategy</span>
-                        <span class="font-mono text-emerald-600 font-bold">88%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
-                        <div class="bg-emerald-500 h-full w-[88%]"></div>
-                    </div>
-                    <span class="text-[10px] text-slate-400 mt-1 block">5-yr transition plan</span>
-                </div>
-                <div class="clean-card rounded-xl p-3 border-t-2 border-t-emerald-500">
-                    <div class="flex justify-between items-center text-xs text-slate-600">
-                        <span class="font-bold">3. Risk Management</span>
-                        <span class="font-mono text-emerald-600 font-bold">90%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
-                        <div class="bg-emerald-500 h-full w-[90%]"></div>
-                    </div>
-                    <span class="text-[10px] text-slate-400 mt-1 block">Credit memo scoring</span>
-                </div>
-                <div class="clean-card rounded-xl p-3 border-t-2 border-t-brand-amberWarm">
-                    <div class="flex justify-between items-center text-xs text-slate-600">
-                        <span class="font-bold">4. Metrics & Targets</span>
-                        <span class="font-mono text-brand-amberWarm font-bold">82%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
-                        <div class="bg-brand-amberWarm h-full w-[82%]"></div>
-                    </div>
-                    <span class="text-[10px] text-slate-400 mt-1 block">PCAF & KGT disclosures</span>
-                </div>
+    <!-- ========================================================================= -->
+    <!-- MODULE 4: ISSB / IFRS S1 & S2 SCREEN                                       -->
+    <!-- ========================================================================= -->
+    <section id="module-4-screen" class="space-y-6 hidden">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-800 rounded-full border border-indigo-200">ISSB / IFRS S1 & S2 Standard</span>
+            <span class="text-xs text-slate-500">Lead Dept: CFO Office & Financial Reporting</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">General Sustainability & Climate-Related Disclosures</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Four Core Pillars (Governance, Strategy, Risk Management, Metrics) with 1.5°C forward transition pathways.</p>
+        </div>
+        <div class="flex space-x-2 text-xs">
+          <button onclick="setISSBScenario('1.5')" id="btn-scen-15" class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-semibold shadow-xs">1.5°C Orderly</button>
+          <button onclick="setISSBScenario('2.0')" id="btn-scen-20" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg font-semibold hover:bg-slate-200">2.0°C Delayed</button>
+          <button onclick="setISSBScenario('3.0')" id="btn-scen-30" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg font-semibold hover:bg-slate-200">3.0°C Hothouse</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- GHG Scopes Inventory Table (IFRS S2) -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm">IFRS S2 Mandatory GHG Inventory</h3>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 1 (Generator Diesel, Vehicles)</span><strong class="font-mono">1,420 tCO₂e</strong></div>
+            <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 2 (Branch Electricity / Kenya Grid)</span><strong class="font-mono">4,810 tCO₂e</strong></div>
+            <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 3 (Cat 1-14: Supply Chain, Paper)</span><strong class="font-mono">8,950 tCO₂e</strong></div>
+            <div class="flex justify-between p-2 rounded-lg bg-indigo-50 border border-indigo-100 font-bold text-indigo-900">
+              <span>Scope 3 (Cat 15: Financed Portfolio)</span>
+              <strong class="font-mono">2,623,334 tCO₂e</strong>
             </div>
-
-            <!-- Regional Physical Risk & Transition Risk Stress Tester -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                <!-- Regional Physical Risk County Matrix -->
-                <div class="lg:col-span-6 clean-card rounded-2xl p-4 space-y-2.5">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-cloud-bolt text-brand-coralRed"></i>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Kenya Regional Physical Climate Vulnerability</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500">Collateral at Hazard</span>
-                    </div>
-
-                    <div class="overflow-x-auto custom-scrollbar">
-                        <table class="w-full text-left text-xs border-collapse">
-                            <thead>
-                                <tr class="border-b border-slate-200 text-[10px] text-slate-400 uppercase font-mono">
-                                    <th class="p-2">County Cluster</th>
-                                    <th class="p-2">Hazard</th>
-                                    <th class="p-2 text-right">Credit EAD</th>
-                                    <th class="p-2 text-center">Risk Level</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 text-[11px] font-mono">
-                                <tr>
-                                    <td class="p-2 text-slate-900 font-sans font-semibold">Northern / ASAL (Turkana, Garissa)</td>
-                                    <td class="p-2 text-brand-amberWarm">Severe Drought & Water Scarcity</td>
-                                    <td class="p-2 text-right font-bold">KES 14.2B</td>
-                                    <td class="p-2 text-center"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-700 font-bold">High</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2 text-slate-900 font-sans font-semibold">Lake Basin (Kisumu, Siaya, Busia)</td>
-                                    <td class="p-2 text-sky-600">Riverine Flash Flooding</td>
-                                    <td class="p-2 text-right font-bold">KES 22.8B</td>
-                                    <td class="p-2 text-center"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-700 font-bold">High</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2 text-slate-900 font-sans font-semibold">Coast (Mombasa, Kilifi, Lamu)</td>
-                                    <td class="p-2 text-teal-600">Sea Level Rise & Port Surge</td>
-                                    <td class="p-2 text-right font-bold">KES 36.1B</td>
-                                    <td class="p-2 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 font-bold">Medium</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2 text-slate-900 font-sans font-semibold">Central Highlands (Murang'a, Kiambu)</td>
-                                    <td class="p-2 text-emerald-600">Landslide / Soil Degradation</td>
-                                    <td class="p-2 text-right font-bold">KES 48.5B</td>
-                                    <td class="p-2 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 font-bold">Medium</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Dynamic Carbon Price Transition Tester -->
-                <div class="lg:col-span-6 clean-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-brand-amberWarm"></i>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Transition Risk: Carbon Price Stress Tester</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-brand-amberWarm font-bold">ICAAP Simulation</span>
-                    </div>
-
-                    <div class="space-y-2 text-xs">
-                        <div class="flex justify-between font-medium">
-                            <span class="text-slate-700">Simulated Carbon Price ($/tCO₂e):</span>
-                            <span id="slider-price-val" class="font-mono font-bold text-brand-amberWarm">$50 / t</span>
-                        </div>
-                        <input type="range" id="carbon-stress-slider" min="10" max="150" step="5" value="50" oninput="runCarbonStress(this.value)" class="w-full accent-amber-500">
-                        <div class="flex justify-between text-[10px] text-slate-400 font-mono">
-                            <span>$10 (Mild)</span>
-                            <span>$50 (Orderly 2°C)</span>
-                            <span>$150 (Disorderly 1.5°C)</span>
-                        </div>
-
-                        <!-- Stress Output Cards -->
-                        <div class="grid grid-cols-2 gap-3 pt-2">
-                            <div class="p-3 bg-rose-50 rounded-xl border border-rose-200">
-                                <span class="text-[10px] uppercase font-mono text-rose-600 block">Portfolio NPL Shift</span>
-                                <div class="text-xl font-extrabold text-rose-700 font-mono mt-0.5" id="stress-npl-val">+1.85%</div>
-                                <span class="text-[10px] text-slate-500">Concentrated in Transport & Cement</span>
-                            </div>
-                            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
-                                <span class="text-[10px] uppercase font-mono text-amber-700 block">Required Capital Provision</span>
-                                <div class="text-xl font-extrabold text-amber-800 font-mono mt-0.5" id="stress-prov-val">KES 3.42B</div>
-                                <span class="text-[10px] text-slate-500">ECL Stage 2 Migration</span>
-                            </div>
-                        </div>
-
-                        <p class="text-[11px] text-slate-500 pt-1">
-                            <strong>CBK Requirement:</strong> Institutions must demonstrate Tier 1 Capital Adequacy Ratio (CAR) survives an abrupt $75/t transition shock without falling below 14.5%.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
+          </div>
+          <p class="text-[11px] text-slate-400">Financed emissions represent 99.4% of total enterprise carbon footprint.</p>
         </div>
 
-        <!-- ========================================================================= -->
-        <!-- MODULE 4: ISSB / IFRS S1 & S2 DISCLOSURES                                -->
-        <!-- ========================================================================= -->
-        <div id="module-view-4" class="module-view hidden space-y-4">
-            
-            <div class="clean-card rounded-2xl p-4 bg-gradient-to-r from-indigo-50/70 via-white to-white border-l-4 border-l-brand-royalIndigo flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-royalIndigo text-white uppercase">Module 4 · ISSB / IFRS S1 & S2</span>
-                        <span class="text-xs text-slate-600 font-medium">Financial Reporting & CFO Sustainability Office</span>
-                    </div>
-                    <h2 class="text-base font-bold text-slate-900 mt-1">Cross-Industry Greenhouse Gas Inventory & Scenario Resilience</h2>
-                    <p class="text-xs text-slate-600">Discloses Scope 1, 2, and 3 emissions alongside forward-looking climate resilience pathways (1.5°C, 2.0°C, 3.0°C).</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Total Comprehensive Carbon Footprint</span>
-                    <span class="text-xl font-extrabold text-brand-royalIndigo font-mono">497,760 tCO₂e</span>
-                </div>
+        <!-- Forward Transition Pathway Chart -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">IFRS S2 Forward Decarbonization Trajectory (2025–2050)</h3>
+              <p class="text-xs text-slate-500">Portfolio Glidepath vs SBTi Net-Zero Target</p>
             </div>
+            <span id="issb-badge" class="text-xs font-mono bg-indigo-50 text-indigo-800 px-2 py-1 rounded">Scenario: 1.5°C Orderly</span>
+          </div>
+          <div class="h-64">
+            <canvas id="issbChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Complete GHG Accounting Inventory (Scope 1, 2, 3 Cat 1-14, 3 Cat 15) -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-                <div class="clean-card rounded-2xl p-3.5 border-l-2 border-l-slate-400">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Scope 1 (Direct Fuel & Backup)</span>
-                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-1">2,840 <span class="text-xs font-sans text-slate-500">tCO₂e</span></div>
-                    <span class="text-[10px] text-slate-500">Branch generators & diesel fleet</span>
-                </div>
-                <div class="clean-card rounded-2xl p-3.5 border-l-2 border-l-slate-400">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Scope 2 (Grid Electricity)</span>
-                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-1">4,120 <span class="text-xs font-sans text-slate-500">tCO₂e</span></div>
-                    <span class="text-[10px] text-slate-500">Kenya grid location-based</span>
-                </div>
-                <div class="clean-card rounded-2xl p-3.5 border-l-2 border-l-slate-400">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Scope 3 (Cat 1-14 Operational)</span>
-                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-1">8,650 <span class="text-xs font-sans text-slate-500">tCO₂e</span></div>
-                    <span class="text-[10px] text-slate-500">Travel, paper, cloud compute</span>
-                </div>
-                <div class="clean-card rounded-2xl p-3.5 border-l-2 border-l-brand-royalIndigo">
-                    <span class="text-[10px] uppercase font-mono text-brand-royalIndigo block font-bold">Scope 3 (Cat 15 Financed)</span>
-                    <div class="text-xl font-extrabold text-brand-royalIndigo font-mono mt-1">482,150 <span class="text-xs font-sans text-slate-500">tCO₂e</span></div>
-                    <span class="text-[10px] text-slate-500"><strong>96.9%</strong> of bank's carbon total</span>
-                </div>
+    <!-- ========================================================================= -->
+    <!-- MODULE 5: GRI STANDARDS & DOUBLE MATERIALITY SCREEN                        -->
+    <!-- ========================================================================= -->
+    <section id="module-5-screen" class="space-y-6 hidden">
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-rose-100 text-rose-800 rounded-full border border-rose-200">GRI Universal & Topic Standards</span>
+            <span class="text-xs text-slate-500">Lead Dept: HR, Facilities, Operations & CSR</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Double Materiality & Operational Impact Gateway</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Capturing internal branch energy consumption, gender equity, supply chain auditing, and socioeconomic materiality.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Operations & HR Submission Gateway -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            <span>Departmental Log Gateway</span>
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Branch / Facility</label>
+              <select class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+                <option>Nairobi Head Office (Upper Hill)</option>
+                <option>Mombasa Regional Hub</option>
+                <option>Kisumu Lakeside Hub</option>
+                <option>Nakuru Commercial Branch</option>
+              </select>
             </div>
-
-            <!-- IFRS S2 Climate Scenario Resilience Simulator -->
-            <div class="clean-card rounded-2xl p-4 space-y-3">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-2">
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-900 uppercase flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-brand-royalIndigo"></i>
-                            <span>IFRS S2 Strategy & Scenario Resilience Trajectories (to 2050)</span>
-                        </h3>
-                        <p class="text-[11px] text-slate-500">Dynamic model comparing Orderly 1.5°C vs Delayed 2.0°C vs Hothouse 3.0°C.</p>
-                    </div>
-                    <!-- Scenario Toggle Buttons -->
-                    <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-mono">
-                        <button onclick="switchIfrsScen('1.5')" id="btn-ifrs-15" class="px-2.5 py-1 rounded-lg font-bold bg-brand-royalIndigo text-white transition">1.5°C Orderly</button>
-                        <button onclick="switchIfrsScen('2.0')" id="btn-ifrs-20" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">2.0°C Delayed</button>
-                        <button onclick="switchIfrsScen('3.0')" id="btn-ifrs-30" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition">3.0°C Hothouse</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-                    <div class="lg:col-span-8 relative h-[260px]">
-                        <canvas id="chart-ifrs-scenarios"></canvas>
-                    </div>
-
-                    <div class="lg:col-span-4 space-y-2 text-xs">
-                        <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200 space-y-1">
-                            <div class="text-xs font-bold text-brand-royalIndigo uppercase font-mono" id="ifrs-scen-title">1.5°C Orderly Net Zero Pathway</div>
-                            <p class="text-slate-600 text-[11px]" id="ifrs-scen-desc">
-                                Stringent regional carbon policies, high clean energy investment in Kenya, and managed phaseout of fossil fuel exposure.
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 font-mono text-[11px]">
-                            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                                <span class="text-slate-400 block text-[10px]">Transition Risk</span>
-                                <span class="text-amber-600 font-bold" id="ifrs-trans">High (Early Impact)</span>
-                            </div>
-                            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                                <span class="text-slate-400 block text-[10px]">Physical Hazard</span>
-                                <span class="text-emerald-600 font-bold" id="ifrs-phys">Low (Controlled)</span>
-                            </div>
-                        </div>
-                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 font-mono text-[11px]">
-                            <span class="text-slate-400 block text-[10px]">Estimated ECL Capital Impact</span>
-                            <span class="text-slate-900 font-bold" id="ifrs-ecl">+ KES 2.1B (absorbable within CAR)</span>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Monthly Power Consumption (kWh)</label>
+              <input type="number" placeholder="45,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
             </div>
-
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Backup Generator Fuel (Liters)</label>
+              <input type="number" placeholder="1,200" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-600 font-semibold mb-1">Female Management Ratio (%)</label>
+              <input type="number" placeholder="46.5" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+            </div>
+            <button onclick="alert('Operational data verified and appended to GRI Disclosure Index.')" class="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold transition-all">
+              Submit Operational Log
+            </button>
+          </div>
         </div>
 
-        <!-- ========================================================================= -->
-        <!-- MODULE 5: GRI STANDARDS & DOUBLE MATERIALITY MATRIX                       -->
-        <!-- ========================================================================= -->
-        <div id="module-view-5" class="module-view hidden space-y-4">
-            
-            <div class="clean-card rounded-2xl p-4 bg-gradient-to-r from-pink-50/70 via-white to-white border-l-4 border-l-brand-roseAmethyst flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-roseAmethyst text-white uppercase">Module 5 · GRI Universal Standards</span>
-                        <span class="text-xs text-slate-600 font-medium">Operations, Facilities, Human Resources & CSR</span>
-                    </div>
-                    <h2 class="text-base font-bold text-slate-900 mt-1">GRI Topics Index & 2D Interactive Double Materiality Matrix</h2>
-                    <p class="text-xs text-slate-600">Cross-maps Financial Materiality (Enterprise Value) vs Impact Materiality (Socio-Environmental Impact), with departmental submission logs.</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-[10px] uppercase font-mono text-slate-400 block">Departmental Status</span>
-                    <span class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 inline-block font-mono">3 / 3 Submitted</span>
-                </div>
+        <!-- Double Materiality Matrix (2D Scatter Plot) -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">GRI 2D Double Materiality Matrix</h3>
+              <p class="text-xs text-slate-500">Financial Materiality (Outside-In) vs. Impact Materiality (Inside-Out)</p>
             </div>
+            <span class="text-xs font-mono bg-rose-50 text-rose-800 px-2 py-1 rounded">GRI 101 / 102 Mapped</span>
+          </div>
+          <div class="h-64">
+            <canvas id="griMaterialityChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Double Materiality Matrix & Departmental Gateway Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                <!-- 2D Double Materiality Scatter Canvas -->
-                <div class="lg:col-span-7 clean-card rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-roseAmethyst"></span>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Interactive Double Materiality Matrix</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500">GRI 3 Core Material Topics</span>
-                    </div>
-                    <p class="text-[11px] text-slate-500">Click any bubble to view corresponding GRI disclosure standard and audit details.</p>
-                    <div class="relative w-full h-[280px]">
-                        <canvas id="chart-gri-materiality"></canvas>
-                    </div>
-                </div>
+  </main>
 
-                <!-- Departmental Data Ingestion Gateway -->
-                <div class="lg:col-span-5 clean-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-cloud-arrow-up text-brand-roseAmethyst"></i>
-                            <h3 class="text-xs font-bold text-slate-900 uppercase">Departmental Quarterly ESG Submission</h3>
-                        </div>
-                        <span class="text-[10px] font-mono text-brand-roseAmethyst font-bold">Scope 1 & 2 Utility Log</span>
-                    </div>
+  <!-- ================= INGESTION MODAL FOR CREDIT RISK (PCAF) ================= -->
+  <div id="ingest-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full mx-4 shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="px-6 py-4 bg-brand-pine text-white flex justify-between items-center">
+        <div>
+          <h3 class="font-bold text-base">Ingest New Credit Facility</h3>
+          <p class="text-xs text-brand-sage">PCAF Financed Carbon Footprint Calculator</p>
+        </div>
+        <button onclick="closeIngestionModal()" class="text-slate-300 hover:text-white text-lg">&times;</button>
+      </div>
 
-                    <form onsubmit="submitDeptGRI(event)" class="space-y-2.5 text-xs">
-                        <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Submitting Department</label>
-                            <select id="gri-dept-select" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-800">
-                                <option value="facilities">Facilities & Branches (GRI 302 Energy / Diesel)</option>
-                                <option value="hr">Human Resources (GRI 405 Diversity & Training)</option>
-                                <option value="procurement">Supply Chain & Procurement (GRI 204 Screening)</option>
-                            </select>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <div class="space-y-1">
-                                <label class="font-semibold text-slate-700">Branch Power (kWh)</label>
-                                <input type="number" id="in-kwh" value="62500" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs text-slate-800 font-mono">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="font-semibold text-slate-700">Diesel Fuel (Liters)</label>
-                                <input type="number" id="in-diesel" value="1420" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs text-slate-800 font-mono">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <div class="space-y-1">
-                                <label class="font-semibold text-slate-700">Female Leadership (%)</label>
-                                <input type="number" id="in-female" step="0.1" value="46.2" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs text-slate-800 font-mono">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="font-semibold text-slate-700">Supplier ESG Pass (%)</label>
-                                <input type="number" id="in-supplier" step="0.1" value="84.5" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs text-slate-800 font-mono">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full py-2 bg-brand-roseAmethyst hover:bg-pink-600 text-white font-bold rounded-xl transition shadow">
-                            Commit Quarterly GRI Audit Log
-                        </button>
-                    </form>
-
-                    <div id="gri-success-tag" class="hidden p-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-700 text-xs">
-                        <i class="fa-solid fa-check-circle mr-1"></i> Quarterly submission verified and committed to bank ESG registry.
-                    </div>
-                </div>
-
-            </div>
-
+      <div class="p-6 space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Borrower / Asset Name</label>
+          <input type="text" id="m-name" placeholder="e.g., Rift Valley Textiles Ltd" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
         </div>
 
-    </main>
-
-    
-    <!-- MODAL: Ingest Credit Facility (Module 1) -->
-    <div id="ingestionModal" class="fixed inset-0 modal-blur z-50 hidden flex items-center justify-center p-4">
-        <div class="clean-card max-w-2xl w-full rounded-2xl p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-brand-emeraldAccent flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-calculator"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-900 text-sm">Credit Facility Financed Emissions Ingestion</h3>
-                        <p class="text-[11px] text-slate-500">Assign PCAF category, calculate attribution factor, and compute financed carbon footprint.</p>
-                    </div>
-                </div>
-                <button onclick="closeIngestionModal()" class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark text-base"></i>
-                </button>
-            </div>
-
-            <form onsubmit="submitFacility(event)" class="space-y-3 text-xs">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                    <div class="space-y-1">
-                        <label class="font-semibold text-slate-700">Borrower Entity Name</label>
-                        <input type="text" id="m-name" required placeholder="e.g., Mount Kenya Agro-Exporters" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="font-semibold text-slate-700">Economic Sector</label>
-                        <select id="m-sector" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs">
-                            <option value="Manufacturing">Manufacturing & Industry</option>
-                            <option value="Agriculture">Agriculture & Agribusiness</option>
-                            <option value="Energy & Infra">Energy & Infrastructure</option>
-                            <option value="Transport">Transport & Logistics</option>
-                            <option value="Real Estate">Real Estate & Construction</option>
-                            <option value="Trade & MSME">Trade & MSME</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="font-semibold text-slate-700">Facility Amount (KES M)</label>
-                        <input type="number" id="m-ead" step="0.1" required placeholder="e.g., 450" oninput="calculateModalPCAF()" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono">
-                    </div>
-                </div>
-
-                <div class="space-y-1 pt-1">
-                    <label class="font-bold uppercase text-[10px] text-slate-500">Select PCAF Category</label>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button type="button" onclick="setModalCat('A')" id="btn-mcat-a" class="py-1.5 rounded-lg border border-brand-emeraldAccent bg-emerald-50 text-brand-emeraldAccent font-bold">Category A (Corporate EVIC)</button>
-                        <button type="button" onclick="setModalCat('B')" id="btn-mcat-b" class="py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 font-medium">Category B (SME Assets)</button>
-                        <button type="button" onclick="setModalCat('C')" id="btn-mcat-c" class="py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 font-medium">Category C (Asset Finance)</button>
-                    </div>
-                </div>
-
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <div id="modal-cat-inputs" class="grid grid-cols-2 gap-2.5">
-                        <div class="space-y-1">
-                            <label class="text-[11px] text-slate-600">Borrower Total EVIC (KES M)</label>
-                            <input type="number" id="m-evic" step="0.1" placeholder="e.g., 2000" oninput="calculateModalPCAF()" class="w-full bg-white border border-slate-200 rounded-lg p-1.5 text-xs font-mono">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[11px] text-slate-600">Reported Scope 1 + 2 (tCO₂e)</label>
-                            <input type="number" id="m-ghg" step="0.1" placeholder="e.g., 12500" oninput="calculateModalPCAF()" class="w-full bg-white border border-slate-200 rounded-lg p-1.5 text-xs font-mono">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between font-mono">
-                    <div>
-                        <span class="text-[9px] text-emerald-800 uppercase block font-bold">Attribution Factor</span>
-                        <span class="text-sm font-extrabold text-emerald-700" id="m-attr-val">0.0%</span>
-                    </div>
-                    <div>
-                        <span class="text-[9px] text-emerald-800 uppercase block font-bold">Calculated Emissions</span>
-                        <span class="text-sm font-extrabold text-emerald-700" id="m-emiss-val">0.0 tCO₂e</span>
-                    </div>
-                    <div>
-                        <span class="text-[9px] text-emerald-800 uppercase block font-bold">PCAF Quality Score</span>
-                        <span class="text-sm font-extrabold text-brand-amberWarm" id="m-score-val">Score 2</span>
-                    </div>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
-                    <button type="button" onclick="closeIngestionModal()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold">Cancel</button>
-                    <button type="submit" class="px-4 py-1.5 bg-brand-emeraldAccent hover:bg-emerald-600 text-white rounded-lg font-bold">Add to Portfolio Log</button>
-                </div>
-            </form>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">PCAF Asset Category</label>
+            <select id="m-cat" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+              <option value="A">Category A: Corporate (EVIC)</option>
+              <option value="B">Category B: SME (Turnover/Assets)</option>
+              <option value="C">Category C: Asset Finance (Vehicles/Property)</option>
+              <option value="P">Category P: Project Finance</option>
+              <option value="S">Category S: Sovereign Debt</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Sector (KNBS Code)</label>
+            <select id="m-sector" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+              <option>Manufacturing</option>
+              <option>Agriculture</option>
+              <option>Energy & Water</option>
+              <option>Transport & Comm.</option>
+              <option>Real Estate</option>
+              <option>Trade</option>
+            </select>
+          </div>
         </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Loan Balance (KES)</label>
+            <input type="number" id="m-loan" placeholder="5,000,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Borrower EVIC / Total Assets (KES)</label>
+            <input type="number" id="m-evic" placeholder="20,000,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Reported GHG Emissions (tCO₂e)</label>
+            <input type="number" id="m-emiss" placeholder="12,500" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">PCAF Data Quality Tier</label>
+            <select id="m-score" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+              <option value="1">Score 1 (Audited Primary Data)</option>
+              <option value="2">Score 2 (Non-Audited Energy Bills)</option>
+              <option value="3">Score 3 (Physical Activity Derived)</option>
+              <option value="4">Score 4 (National KNBS Proxies)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 flex justify-between items-center text-xs">
+          <span class="text-slate-600">Calculated Attribution:</span>
+          <span id="m-attr-preview" class="font-bold text-emerald-700 font-mono">25.00%</span>
+        </div>
+
+        <button onclick="commitNewFacility()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs shadow transition-all">
+          Calculate & Append to Portfolio Ledger
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- MODAL: Export Multi-Framework Audit Deck -->
-    <div id="exportModal" class="fixed inset-0 modal-blur z-50 hidden flex items-center justify-center p-4">
-        <div class="clean-card max-w-lg w-full rounded-2xl p-5 shadow-2xl space-y-3.5">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-file-pdf text-brand-emeraldAccent text-lg"></i>
-                    <h3 class="font-bold text-slate-900 text-sm">Export Institutional ESG Multi-Framework Audit Deck</h3>
-                </div>
-                <button onclick="closeExportModal()" class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="text-xs text-slate-600 space-y-2">
-                <p>Generating unified supervisory ESG disclosure file for <strong>East Africa Commercial Bank</strong>:</p>
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1 font-mono text-[11px] text-slate-700">
-                    <div>✓ Module 1: PCAF Scope 3 Cat 15 (482,150 tCO₂e, Score 2.74)</div>
-                    <div>✓ Module 2: Kenya Green Taxonomy GAR (18.4% Aligned)</div>
-                    <div>✓ Module 3: CBK Climate Risk 4-Pillar Supervisory Report (88.8%)</div>
-                    <div>✓ Module 4: ISSB / IFRS S1 & S2 Financial Metrics & Scenarios</div>
-                    <div>✓ Module 5: GRI Standards Materiality & Operational Utility Log</div>
-                </div>
-                <p class="text-[10px] text-slate-400">Formatted to CBK Prudential Guidelines and Nairobi Securities Exchange (NSE) ESG Reporting Framework.</p>
-            </div>
-            <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
-                <button onclick="closeExportModal()" class="px-3.5 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold">Cancel</button>
-                <button onclick="simulateExport()" id="btn-export-deck" class="px-4 py-1.5 bg-brand-emeraldAccent hover:bg-emerald-600 text-white rounded-lg text-xs font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-download"></i>
-                    <span>Download Comprehensive PDF</span>
-                </button>
-            </div>
-        </div>
-    </div>
+  <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+  <script>
+    // --- EXACT SECTOR DATA FROM EXCEL WORKBOOK (Sector Analysis Sheet) ---
+    const sectorData = [
+      { sector: "Trade", pct: 0.3628, loanExp: 21599829944, knbsVal: 1219711000000, attr: 0.017709, emis: 1100000, financed: 19479.9, score: 4 },
+      { sector: "Manufacturing", pct: 0.2449, loanExp: 14580480577, knbsVal: 1176393000000, attr: 0.012394, emis: 5800000, financed: 71886.5, score: 4 },
+      { sector: "Real Estate", pct: 0.1326, loanExp: 7894535420, knbsVal: 1360284000000, attr: 0.005804, emis: 800000, financed: 4642.9, score: 4 },
+      { sector: "Transport & Communication", pct: 0.1060, loanExp: 6310865419, knbsVal: 2425502000000, attr: 0.002602, emis: 15800000, financed: 41109.7, score: 4 },
+      { sector: "Household", pct: 0.0572, loanExp: 3405485868, knbsVal: 90186000000, attr: 0.037761, emis: 20500000, financed: 774094.2, score: 4 },
+      { sector: "Construction", pct: 0.0441, loanExp: 2625558160, knbsVal: 1027123000000, attr: 0.002556, emis: 1200000, financed: 3067.5, score: 4 },
+      { sector: "Financial Services", pct: 0.0231, loanExp: 1375292370, knbsVal: 1284840000000, attr: 0.001070, emis: 50000, financed: 53.5, score: 4 },
+      { sector: "Agriculture", pct: 0.0153, loanExp: 910907933.12, knbsVal: 3646102000000, attr: 0.000250, emis: 60000000, financed: 14990.0, score: 4 },
+      { sector: "Tourism", pct: 0.0082, loanExp: 488199023, knbsVal: 2560400000, attr: 0.190673, emis: 900000, financed: 171605.7, score: 4 },
+      { sector: "Energy & Water", pct: 0.0058, loanExp: 345311504, knbsVal: 359307000000, attr: 0.000961, emis: 21500000, financed: 20662.5, score: 4 }
+    ];
 
-    <script>
-        // Global State
-        let activeTab = 1;
-        let currentCurrency = 'KES';
-        const fxUSD = 0.0077; // 1 KES ~ 0.0077 USD
-        let currentModalCat = 'A';
+    let currentCurrency = 'KES';
+    let currentModule = 1;
+    let sectorChart, sectorDonutChart, kgtChartInstance, cbkChartInstance, issbChartInstance, griChartInstance;
 
-        // Sample Portfolio Facilities
-        let facilityLedger = [
-            { id: 'FAC-2026-001', name: 'Bamburi Clinker & Cement Mills', sector: 'Manufacturing', ead: 3400.0, category: 'A', attr: 34.5, emissions: 84600.0, score: 1, desk: 'Corporate Syndicates' },
-            { id: 'FAC-2026-002', name: 'Lake Turkana Wind Farm Expansion', sector: 'Energy & Infra', ead: 4800.0, category: 'A', attr: 28.0, emissions: 3800.0, score: 1, desk: 'Infrastructure Desk' },
-            { id: 'FAC-2026-003', name: 'Kericho Highland Tea Cooperative', sector: 'Agriculture', ead: 1200.0, category: 'B', attr: 65.0, emissions: 32400.0, score: 3, desk: 'Agribusiness Unit' },
-            { id: 'FAC-2026-004', name: 'Upper Hill Green Office Tower', sector: 'Real Estate', ead: 2100.0, category: 'C', attr: 50.0, emissions: 14200.0, score: 2, desk: 'Mortgage Division' },
-            { id: 'FAC-2026-005', name: 'Mombasa Port Electric Drayage Fleet', sector: 'Transport', ead: 950.0, category: 'C', attr: 70.0, emissions: 18900.0, score: 2, desk: 'Asset Finance' },
-            { id: 'FAC-2026-006', name: 'Nairobi Central Fresh Produce', sector: 'Trade & MSME', ead: 650.0, category: 'B', attr: 58.0, emissions: 11400.0, score: 4, desk: 'MSME Banking' }
-        ];
+    // --- INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSectorTable();
+      initSectorCharts();
+      initKGTChart();
+      initCBKChart();
+      initISSBChart();
+      initGRIChart();
+    });
 
-        // Chart instances dictionary
-        let charts = {};
+    // --- MODULE NAVIGATION SWITCHER ---
+    function switchModule(modId) {
+      currentModule = modId;
+      for (let i = 1; i <= 5; i++) {
+        const screen = document.getElementById(`module-${i}-screen`);
+        const tab = document.getElementById(`tab-mod-${i}`);
+        if (i === modId) {
+          screen.classList.remove('hidden');
+          tab.classList.add('active', 'text-white', 'bg-brand-card', 'border-b-2', 'border-brand-sage');
+          tab.classList.remove('text-slate-300');
+        } else {
+          screen.classList.add('hidden');
+          tab.classList.remove('active', 'text-white', 'bg-brand-card', 'border-b-2', 'border-brand-sage');
+          tab.classList.add('text-slate-300');
+        }
+      }
+    }
 
-        // Tab Switching
-        function switchTab(tabIndex) {
-            activeTab = tabIndex;
+    // --- PCAF SUB-VIEW TOGGLE ---
+    function togglePCAFView(view) {
+      const secView = document.getElementById('pcaf-sector-view');
+      const assetView = document.getElementById('pcaf-asset-view');
+      const btnSec = document.getElementById('pcaf-btn-sector');
+      const btnAsset = document.getElementById('pcaf-btn-asset');
 
-            // Highlight tab buttons
-            for (let i = 1; i <= 5; i++) {
-                const btn = document.getElementById(`tab-${i}`);
-                const view = document.getElementById(`module-view-${i}`);
-                if (i === tabIndex) {
-                    btn.className = "tab-btn tab-btn-active flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-brand-forestDeep text-brand-softSage";
-                    view.classList.remove('hidden');
-                } else {
-                    btn.className = "tab-btn flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-brand-forestDeep text-brand-softSage hover:text-white";
-                    view.classList.add('hidden');
-                }
+      if (view === 'sector') {
+        secView.classList.remove('hidden');
+        assetView.classList.add('hidden');
+        btnSec.className = "px-3 py-1.5 rounded-lg font-bold bg-white text-slate-900 shadow-xs transition-all";
+        btnAsset.className = "px-3 py-1.5 rounded-lg font-medium text-slate-600 hover:text-slate-900 transition-all";
+      } else {
+        secView.classList.add('hidden');
+        assetView.classList.remove('hidden');
+        btnAsset.className = "px-3 py-1.5 rounded-lg font-bold bg-white text-slate-900 shadow-xs transition-all";
+        btnSec.className = "px-3 py-1.5 rounded-lg font-medium text-slate-600 hover:text-slate-900 transition-all";
+      }
+    }
+
+    // --- RENDER SECTOR ANALYSIS TABLE ---
+    function renderSectorTable() {
+      const tbody = document.getElementById('sector-table-body');
+      tbody.innerHTML = '';
+
+      sectorData.forEach((row) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 transition-colors";
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900">${row.sector}</td>
+          <td class="py-3 px-4">${(row.pct * 100).toFixed(2)}%</td>
+          <td class="py-3 px-4">${formatCurrency(row.loanExp)}</td>
+          <td class="py-3 px-4">${formatCurrency(row.knbsVal)}</td>
+          <td class="py-3 px-4 text-emerald-700 font-semibold">${(row.attr * 100).toFixed(4)}%</td>
+          <td class="py-3 px-4">${row.emis.toLocaleString()} tCO₂e</td>
+          <td class="py-3 px-4 font-bold text-slate-900">${Math.round(row.financed).toLocaleString()} tCO₂e</td>
+          <td class="py-3 px-4 text-right">
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-bold">Tier ${row.score}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // --- FORMAT CURRENCY UTILITY ---
+    function formatCurrency(val) {
+      if (currentCurrency === 'USD') {
+        const usd = val / 130; // KES to USD approx
+        return '$' + (usd >= 1e9 ? (usd / 1e9).toFixed(2) + 'B' : (usd / 1e6).toFixed(2) + 'M');
+      }
+      return 'KES ' + (val >= 1e9 ? (val / 1e9).toFixed(2) + 'B' : (val / 1e6).toFixed(2) + 'M');
+    }
+
+    function setCurrency(curr) {
+      currentCurrency = curr;
+      document.getElementById('curr-kes').className = curr === 'KES' ? "px-2.5 py-1 rounded font-semibold text-brand-pine bg-brand-sage" : "px-2.5 py-1 rounded font-semibold text-slate-300 hover:text-white";
+      document.getElementById('curr-usd').className = curr === 'USD' ? "px-2.5 py-1 rounded font-semibold text-brand-pine bg-brand-sage" : "px-2.5 py-1 rounded font-semibold text-slate-300 hover:text-white";
+      renderSectorTable();
+    }
+
+    function handleDeptChange(dept) {
+      if (dept === 'risk') switchModule(1);
+      if (dept === 'origination') switchModule(2);
+      if (dept === 'erm') switchModule(3);
+      if (dept === 'cfo') switchModule(4);
+      if (dept === 'ops') switchModule(5);
+    }
+
+    // --- CHARTS INITIALIZATION ---
+    function initSectorCharts() {
+      // Bar Chart: Loan vs Emissions
+      const ctxBar = document.getElementById('sectorComparisonChart').getContext('2d');
+      sectorChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: sectorData.map(s => s.sector),
+          datasets: [
+            {
+              label: 'Bank Loan Exposure (KES M)',
+              data: sectorData.map(s => Math.round(s.loanExp / 1e6)),
+              backgroundColor: '#10B981',
+              borderRadius: 6,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Financed Emissions (tCO₂e)',
+              data: sectorData.map(s => Math.round(s.financed)),
+              backgroundColor: '#0A3A2A',
+              borderRadius: 6,
+              yAxisID: 'y1'
             }
-
-            // Sync Owner Tag
-            const ownerTag = document.getElementById('activeOwnerLabel');
-            if (tabIndex === 1) ownerTag.innerText = "Credit Risk & Analytics";
-            if (tabIndex === 2) ownerTag.innerText = "Origination & Lending";
-            if (tabIndex === 3) ownerTag.innerText = "ERM Department";
-            if (tabIndex === 4) ownerTag.innerText = "CFO & Sustainability Office";
-            if (tabIndex === 5) ownerTag.innerText = "Operations & HR";
-
-            // Trigger chart rendering for visible tab
-            setTimeout(() => {
-                if (tabIndex === 1) renderModule1Charts();
-                if (tabIndex === 2) renderModule2Charts();
-                if (tabIndex === 4) renderModule4Charts();
-                if (tabIndex === 5) renderModule5Charts();
-            }, 60);
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { position: 'left', title: { display: true, text: 'KES Millions' } },
+            y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'tCO₂e' } }
+          }
         }
+      });
 
-        // Persona Selection Handler
-        function handlePersonaChange(val) {
-            if (val === 'credit') switchTab(1);
-            if (val === 'origination') switchTab(2);
-            if (val === 'erm') switchTab(3);
-            if (val === 'cfo') switchTab(4);
-            if (val === 'hr') switchTab(5);
+      // Donut Chart: Concentration
+      const ctxDonut = document.getElementById('sectorShareDonut').getContext('2d');
+      sectorDonutChart = new Chart(ctxDonut, {
+        type: 'doughnut',
+        data: {
+          labels: sectorData.map(s => s.sector),
+          datasets: [{
+            data: sectorData.map(s => (s.pct * 100).toFixed(1)),
+            backgroundColor: [
+              '#10B981', '#0EA5E9', '#F59E0B', '#6366F1', '#EC4899', 
+              '#84CC16', '#14B8A6', '#F43F5E', '#A855F7', '#64748B'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
         }
+      });
+    }
 
-        // Currency Toggle
-        function setCurrency(curr) {
-            currentCurrency = curr;
-            const btnK = document.getElementById('curr-kes');
-            const btnU = document.getElementById('curr-usd');
+    function initKGTChart() {
+      const ctx = document.getElementById('kgtChart').getContext('2d');
+      kgtChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Renewable Energy', 'Climate-Smart Agri', 'Green Buildings', 'Clean Transport', 'Water / Waste'],
+          datasets: [
+            { label: 'Eligible Volume (KES B)', data: [4.2, 3.1, 2.5, 2.2, 2.2], backgroundColor: '#BAE6FD' },
+            { label: 'KGT Aligned (GAR) (KES B)', data: [3.8, 2.4, 1.8, 1.6, 1.36], backgroundColor: '#0284C7' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
 
-            if (curr === 'KES') {
-                btnK.className = "px-2.5 py-1 rounded font-bold bg-brand-emeraldAccent text-brand-forestDark transition";
-                btnU.className = "px-2.5 py-1 rounded font-medium text-brand-softSage hover:text-white transition";
-            } else {
-                btnU.className = "px-2.5 py-1 rounded font-bold bg-brand-emeraldAccent text-brand-forestDark transition";
-                btnK.className = "px-2.5 py-1 rounded font-medium text-brand-softSage hover:text-white transition";
-            }
+    function initCBKChart() {
+      const ctx = document.getElementById('cbkRiskChart').getContext('2d');
+      cbkChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Turkana & Garissa (Drought)', 'Lake Victoria Basin (Floods)', 'Coastal Belt (Sea Inundation)', 'Nairobi Commercial (Transition)'],
+          datasets: [
+            { label: 'Loan Book at Risk (KES B)', data: [5.4, 4.2, 3.1, 8.8], backgroundColor: '#F59E0B' },
+            { label: 'Expected Credit Loss (ECL) Buffer', data: [0.8, 0.6, 0.4, 1.1], backgroundColor: '#EF4444' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
 
-            const unitLabels = document.querySelectorAll('.curr-unit');
-            unitLabels.forEach(u => u.innerText = curr === 'USD' ? '$M' : 'KES M');
+    function initISSBChart() {
+      const ctx = document.getElementById('issbChart').getContext('2d');
+      issbChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['2025 (Baseline)', '2030 (Interim)', '2035', '2040', '2045', '2050 (Net Zero)'],
+          datasets: [
+            { label: '1.5°C Paris Aligned Glidepath', data: [2623334, 1800000, 1100000, 600000, 200000, 0], borderColor: '#10B981', borderDash: [4, 4], fill: false },
+            { label: 'Current Financed Projection', data: [2623334, 2100000, 1600000, 1200000, 800000, 450000], borderColor: '#6366F1', fill: false, tension: 0.2 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
 
-            renderFacilitiesTable();
+    function initGRIChart() {
+      const ctx = document.getElementById('griMaterialityChart').getContext('2d');
+      griChartInstance = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Material Topics',
+            data: [
+              { x: 8.5, y: 9.2, label: 'Financed GHG Footprint' },
+              { x: 9.0, y: 8.0, label: 'Financial Inclusion & SME Lending' },
+              { x: 6.0, y: 8.5, label: 'Climate Resilience in Agriculture' },
+              { x: 7.5, y: 6.0, label: 'Gender Diversity & Equal Pay' },
+              { x: 4.5, y: 7.0, label: 'Paper & Internal Energy Use' }
+            ],
+            backgroundColor: '#F43F5E',
+            pointRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { min: 0, max: 10, title: { display: true, text: 'Financial Materiality (Outside-In)' } },
+            y: { min: 0, max: 10, title: { display: true, text: 'Impact Materiality (Inside-Out)' } }
+          }
         }
+      });
+    }
 
-        function switchPeriod(val) {
-            // Period simulation
-            console.log("Period switched: ", val);
-        }
+    // --- INTERACTIVE ACTIONS ---
+    function openIngestionModal() {
+      document.getElementById('ingest-modal').classList.remove('hidden');
+    }
+    function closeIngestionModal() {
+      document.getElementById('ingest-modal').classList.add('hidden');
+    }
 
-        function renderFacilitiesTable() {
-            const tbody = document.getElementById('facilityTableBody');
-            tbody.innerHTML = '';
+    function commitNewFacility() {
+      const name = document.getElementById('m-name').value || 'New Loan Facility';
+      const loan = parseFloat(document.getElementById('m-loan').value) || 1000000;
+      const evic = parseFloat(document.getElementById('m-evic').value) || 10000000;
+      const emis = parseFloat(document.getElementById('m-emiss').value) || 5000;
+      const score = document.getElementById('m-score').value;
 
-            const term = document.getElementById('facilitySearch') ? document.getElementById('facilitySearch').value.toLowerCase() : '';
-            const filtered = facilityLedger.filter(f => f.name.toLowerCase().includes(term) || f.sector.toLowerCase().includes(term) || f.id.toLowerCase().includes(term));
+      const attr = loan / evic;
+      const financed = attr * emis;
 
-            filtered.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+      alert(`Facility "${name}" successfully ingested!\nAttribution Factor: ${(attr * 100).toFixed(2)}%\nFinanced Carbon Footprint: ${financed.toFixed(1)} tCO2e\nPCAF Quality Score: Tier ${score}`);
+      closeIngestionModal();
+    }
 
-                const eadDisp = currentCurrency === 'USD' ? (row.ead * fxUSD).toFixed(1) : row.ead.toFixed(1);
+    function updateStressTest(val) {
+      document.getElementById('tax-val').innerText = `$${val} / tCO₂e`;
+      const mult = val / 50;
+      document.getElementById('stress-npl').innerText = `+${(1.85 * mult).toFixed(2)}%`;
+      document.getElementById('stress-cap').innerText = `KES ${Math.round(820 * mult)}M`;
+    }
 
-                tr.innerHTML = `
-                    <td class="p-2.5 text-slate-900 font-bold">${row.id}</td>
-                    <td class="p-2.5 font-sans font-semibold text-slate-800">${row.name}</td>
-                    <td class="p-2.5 font-sans text-slate-600">${row.sector}</td>
-                    <td class="p-2.5 text-right font-bold text-slate-900">${eadDisp}</td>
-                    <td class="p-2.5 text-center">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
-                            row.category === 'A' ? 'bg-sky-100 text-sky-800' :
-                            row.category === 'B' ? 'bg-emerald-100 text-emerald-800' :
-                            'bg-amber-100 text-amber-800'
-                        }">Cat ${row.category}</span>
-                    </td>
-                    <td class="p-2.5 text-right font-bold text-brand-tealVibrant">${row.attr.toFixed(1)}%</td>
-                    <td class="p-2.5 text-right font-bold text-slate-900">${row.emissions.toLocaleString()}</td>
-                    <td class="p-2.5 text-center">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
-                            row.score <= 2 ? 'bg-emerald-100 text-emerald-800' :
-                            row.score === 3 ? 'bg-sky-100 text-sky-800' :
-                            'bg-amber-100 text-amber-800'
-                        }">Score ${row.score}</span>
-                    </td>
-                    <td class="p-2.5 font-sans text-slate-500">${row.desk}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
+    function runKGTScreening() {
+      const deal = document.getElementById('kgt-deal-name').value || 'Unspecified Deal';
+      const sc = document.getElementById('chk-sc').checked;
+      const dnsh = document.getElementById('chk-dnsh').checked;
+      const mss = document.getElementById('chk-mss').checked;
 
-        // Modal Category Selector
-        function setModalCat(cat) {
-            currentModalCat = cat;
-            ['a', 'b', 'c'].forEach(c => {
-                const btn = document.getElementById(`btn-mcat-${c}`);
-                if (c === cat.toLowerCase()) {
-                    btn.className = "py-1.5 rounded-lg border border-brand-emeraldAccent bg-emerald-50 text-brand-emeraldAccent font-bold";
-                } else {
-                    btn.className = "py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 font-medium";
-                }
-            });
-            calculateModalPCAF();
-        }
+      if (sc && dnsh && mss) {
+        alert(`Deal "${deal}" complies with KGT Technical Screening Criteria, DNSH verification, and MSS safeguards. Added to Green Asset Ratio!`);
+      } else {
+        alert(`Deal "${deal}" cannot be classified as KGT-Aligned until DNSH and Minimum Safeguards are satisfied.`);
+      }
+    }
 
-        function calculateModalPCAF() {
-            const ead = parseFloat(document.getElementById('m-ead').value) || 0;
-            const evic = parseFloat(document.getElementById('m-evic').value) || 0;
-            const ghg = parseFloat(document.getElementById('m-ghg').value) || 0;
+    function setISSBScenario(scen) {
+      const badge = document.getElementById('issb-badge');
+      if (scen === '1.5') badge.innerText = "Scenario: 1.5°C Orderly (SBTi)";
+      if (scen === '2.0') badge.innerText = "Scenario: 2.0°C Delayed Action";
+      if (scen === '3.0') badge.innerText = "Scenario: 3.0°C Current Policies (Hothouse)";
+    }
 
-            let attr = 0;
-            let emissions = 0;
-            let score = 2;
+    function triggerExportAuditReport() {
+      alert("Generating Consolidated Bank ESG & Financed Emissions Audit Package...\nIncludes:\n- PCAF Scope 3 Cat 15 (KES 59.54B book)\n- Kenya Green Taxonomy GAR Statement\n- CBK Supervisory Guidance Disclosure\n- IFRS S1/S2 Climate Report");
+    }
 
-            if (currentModalCat === 'A' && evic > 0) {
-                attr = Math.min((ead / evic) * 100, 100);
-                emissions = (attr / 100) * ghg;
-                score = ghg > 0 ? 1 : 2;
-            } else if (currentModalCat === 'B') {
-                attr = Math.min((ead / 1200.0) * 100, 100);
-                emissions = (attr / 100) * 8200;
-                score = 3;
-            } else {
-                attr = Math.min((ead / 800.0) * 100, 100);
-                emissions = (attr / 100) * 4500;
-                score = 2;
-            }
-
-            document.getElementById('m-attr-val').innerText = attr.toFixed(1) + '%';
-            document.getElementById('m-emiss-val').innerText = emissions.toFixed(0) + ' tCO₂e';
-            document.getElementById('m-score-val').innerText = 'Score ' + score;
-        }
-
-        function submitFacility(e) {
-            e.preventDefault();
-            const name = document.getElementById('m-name').value;
-            const sector = document.getElementById('m-sector').value;
-            const ead = parseFloat(document.getElementById('m-ead').value) || 100;
-            const attr = parseFloat(document.getElementById('m-attr-val').innerText) || 30.0;
-            const emissions = parseFloat(document.getElementById('m-emiss-val').innerText) || 1500;
-            const scoreText = document.getElementById('m-score-val').innerText.replace('Score ', '');
-            const score = parseInt(scoreText) || 2;
-
-            const newFacility = {
-                id: `FAC-2026-${Math.floor(100 + Math.random() * 900)}`,
-                name: name,
-                sector: sector,
-                ead: ead,
-                category: currentModalCat,
-                attr: attr,
-                emissions: emissions,
-                score: score,
-                desk: 'Credit Analytics'
-            };
-
-            facilityLedger.unshift(newFacility);
-            renderFacilitiesTable();
-            closeIngestionModal();
-            renderModule1Charts();
-        }
-
-        function openIngestionModal() {
-            document.getElementById('ingestionModal').classList.remove('hidden');
-        }
-
-        function closeIngestionModal() {
-            document.getElementById('ingestionModal').classList.add('hidden');
-        }
-
-        function openExportModal() {
-            document.getElementById('exportModal').classList.remove('hidden');
-        }
-
-        function closeExportModal() {
-            document.getElementById('exportModal').classList.add('hidden');
-        }
-
-        function simulateExport() {
-            const btn = document.getElementById('btn-export-deck');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF...`;
-            setTimeout(() => {
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> Export Complete`;
-                setTimeout(() => {
-                    closeExportModal();
-                    btn.innerHTML = `<i class="fa-solid fa-download"></i> <span>Download Comprehensive PDF</span>`;
-                }, 1000);
-            }, 1200);
-        }
-
-        function exportCSV() {
-            let csv = "Facility ID,Borrower Name,Sector,EAD (KES M),Category,Attribution (%),Financed Emissions (tCO2e),PCAF Score\n";
-            facilityLedger.forEach(f => {
-                csv += `"${f.id}","${f.name}","${f.sector}",${f.ead},"${f.category}",${f.attr},${f.emissions},${f.score}\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', `PCAF_Financed_Emissions_Ledger_${Date.now()}.csv`);
-            a.click();
-        }
-
-        // Module 2: KGT Screener Logic
-        function evaluateKgtDeal() {
-            const tsc = document.getElementById('chk-tsc').checked;
-            const dnsh = document.getElementById('chk-dnsh').checked;
-            const mss = document.getElementById('chk-mss').checked;
-
-            const banner = document.getElementById('kgt-status-banner');
-            const text = document.getElementById('kgt-status-text');
-
-            if (tsc && dnsh && mss) {
-                banner.className = "p-3 rounded-xl bg-emerald-50 border border-emerald-300 flex items-center justify-between";
-                text.innerText = "KGT Fully Aligned (Eligible for Green Asset Ratio)";
-            } else if (tsc && (!dnsh || !mss)) {
-                banner.className = "p-3 rounded-xl bg-amber-50 border border-amber-300 flex items-center justify-between";
-                text.innerText = "KGT Eligible (Pending DNSH / Social Verification)";
-            } else {
-                banner.className = "p-3 rounded-xl bg-rose-50 border border-rose-300 flex items-center justify-between";
-                text.innerText = "KGT Ineligible (Fails Technical Screening Criteria)";
-            }
-        }
-
-        function commitKgtDeal() {
-            const amount = parseFloat(document.getElementById('deal-amount').value) || 100;
-            document.getElementById('ribbon-gar').innerText = "18.8% aligned";
-            document.getElementById('kgt-gar-badge').innerText = "18.8% Aligned";
-            alert("Deal committed to Kenya Green Taxonomy Registry. Green Asset Ratio (GAR) updated to 18.8%.");
-        }
-
-        // Module 3: CBK Carbon Price Stress Test
-        function runCarbonStress(price) {
-            document.getElementById('slider-price-val').innerText = `$${price} / t`;
-            const p = parseFloat(price);
-
-            const npl = (0.6 + (p / 150) * 3.4).toFixed(2);
-            const prov = (1.2 + (p / 150) * 6.2).toFixed(2);
-
-            document.getElementById('stress-npl-val').innerText = `+${npl}%`;
-            document.getElementById('stress-prov-val').innerText = `KES ${prov}B`;
-        }
-
-        // Module 4: IFRS Scenario Switching
-        function switchIfrsScen(scen) {
-            ['15', '20', '30'].forEach(s => {
-                const btn = document.getElementById(`btn-ifrs-${s}`);
-                if (s === scen.replace('.', '')) {
-                    btn.className = "px-2.5 py-1 rounded-lg font-bold bg-brand-royalIndigo text-white transition";
-                } else {
-                    btn.className = "px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition";
-                }
-            });
-
-            const t = document.getElementById('ifrs-scen-title');
-            const d = document.getElementById('ifrs-scen-desc');
-            const trans = document.getElementById('ifrs-trans');
-            const phys = document.getElementById('ifrs-phys');
-            const ecl = document.getElementById('ifrs-ecl');
-
-            if (scen === '1.5') {
-                t.innerText = "1.5°C Orderly Net Zero Pathway";
-                d.innerText = "Stringent regional carbon policies, high clean energy investment in Kenya, and managed phaseout of fossil fuel exposure.";
-                trans.innerText = "High (Early Impact)";
-                phys.innerText = "Low (Controlled)";
-                ecl.innerText = "+ KES 2.1B (absorbable within CAR)";
-            } else if (scen === '2.0') {
-                t.innerText = "2.0°C Delayed Transition Pathway";
-                d.innerText = "Policies delayed to 2030, followed by sudden carbon taxes and abrupt regulatory tightening across East Africa.";
-                trans.innerText = "Very High (Abrupt)";
-                phys.innerText = "Moderate Risk";
-                ecl.innerText = "+ KES 4.8B (capital buffer stress)";
-            } else {
-                t.innerText = "3.0°C Current Policies (Hothouse World)";
-                d.innerText = "No major carbon reduction. Chronic physical drought in Northern Kenya and devastating riverine flooding in the Lake Basin.";
-                trans.innerText = "Low Policy Risk";
-                phys.innerText = "Severe Physical Disruption";
-                ecl.innerText = "+ KES 8.9B (systemic stress)";
-            }
-        }
-
-        // Module 5: Departmental GRI Submission
-        function submitDeptGRI(e) {
-            e.preventDefault();
-            const tag = document.getElementById('gri-success-tag');
-            tag.classList.remove('hidden');
-            setTimeout(() => tag.classList.add('hidden'), 4000);
-        }
-
-        function renderModule1Charts() {
-            if (charts.m1Sector) charts.m1Sector.destroy();
-            if (charts.m1Quality) charts.m1Quality.destroy();
-
-            // Stacked Sector Emissions
-            const ctx1 = document.getElementById('chart-pcaf-sector').getContext('2d');
-            charts.m1Sector = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['Manufacturing', 'Agriculture', 'Energy & Infra', 'Transport', 'Real Estate', 'Trade & MSME'],
-                    datasets: [
-                        {
-                            label: 'Financed Emissions (tCO₂e)',
-                            data: [120000, 48000, 32000, 28000, 18000, 14000],
-                            backgroundColor: '#10b981',
-                            borderRadius: 6
-                        },
-                        {
-                            label: 'Paris 1.5°C Cap',
-                            data: [95000, 40000, 25000, 20000, 14000, 10000],
-                            type: 'line',
-                            borderColor: '#f59e0b',
-                            borderWidth: 2,
-                            borderDash: [4, 4],
-                            pointRadius: 3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
-                        y: { grid: { color: '#f1f5f9' }, ticks: { color: '#64748b', font: { size: 10 } } }
-                    },
-                    plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }
-                    }
-                }
-            });
-
-            // Data Quality Doughnut
-            const ctx2 = document.getElementById('chart-pcaf-quality').getContext('2d');
-            charts.m1Quality = new Chart(ctx2, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Score 1 (Audited)', 'Score 2 (Reported)', 'Score 3 (Physical)', 'Score 4 (Sector)', 'Score 5 (Macro)'],
-                    datasets: [{
-                        data: [24, 26, 28, 14, 8],
-                        backgroundColor: ['#10b981', '#0ea5e9', '#6366f1', '#f59e0b', '#f43f5e'],
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '68%',
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-                    }
-                }
-            });
-        }
-
-        function renderModule2Charts() {
-            if (charts.m2Objectives) charts.m2Objectives.destroy();
-            const ctx = document.getElementById('chart-kgt-objectives').getContext('2d');
-            charts.m2Objectives = new Chart(ctx, {
-                type: 'polarArea',
-                data: {
-                    labels: ['Climate Mitigation', 'Climate Adaptation', 'Water Resources', 'Circular Economy', 'Pollution Prevention', 'Healthy Ecosystems'],
-                    datasets: [{
-                        data: [39.5, 14.8, 8.2, 3.4, 1.8, 0.5],
-                        backgroundColor: [
-                            'rgba(14, 165, 233, 0.75)',
-                            'rgba(16, 185, 129, 0.75)',
-                            'rgba(6, 182, 212, 0.75)',
-                            'rgba(245, 158, 11, 0.75)',
-                            'rgba(99, 102, 241, 0.75)',
-                            'rgba(236, 72, 153, 0.75)'
-                        ],
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'right', labels: { boxWidth: 10, font: { size: 9 } } }
-                    },
-                    scales: {
-                        r: { ticks: { display: false } }
-                    }
-                }
-            });
-        }
-
-        function renderModule4Charts() {
-            if (charts.m4Scenarios) charts.m4Scenarios.destroy();
-            const ctx = document.getElementById('chart-ifrs-scenarios').getContext('2d');
-            charts.m4Scenarios = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['2024 (Base)', '2026', '2028', '2030', '2035', '2040', '2050'],
-                    datasets: [
-                        {
-                            label: 'Net Zero 1.5°C Pathway',
-                            data: [482, 420, 360, 280, 190, 95, 0],
-                            borderColor: '#10b981',
-                            borderWidth: 3,
-                            pointRadius: 3,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Delayed Transition 2.0°C',
-                            data: [482, 470, 460, 380, 240, 140, 45],
-                            borderColor: '#f59e0b',
-                            borderWidth: 2,
-                            borderDash: [4, 4],
-                            pointRadius: 2,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Current Policies 3.0°C',
-                            data: [482, 490, 505, 525, 560, 590, 640],
-                            borderColor: '#f43f5e',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            tension: 0.3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
-                        y: {
-                            title: { display: true, text: 'Financed Carbon (k tCO₂e)', font: { size: 10 } },
-                            grid: { color: '#f1f5f9' },
-                            ticks: { color: '#64748b', font: { size: 10 } }
-                        }
-                    },
-                    plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }
-                    }
-                }
-            });
-        }
-
-        function renderModule5Charts() {
-            if (charts.m5Materiality) charts.m5Materiality.destroy();
-            const ctx = document.getElementById('chart-gri-materiality').getContext('2d');
-            charts.m5Materiality = new Chart(ctx, {
-                type: 'bubble',
-                data: {
-                    datasets: [{
-                        label: 'GRI Material Topics',
-                        data: [
-                            { x: 88, y: 92, r: 14, label: 'Financed Carbon Emissions (GRI 305)' },
-                            { x: 82, y: 74, r: 11, label: 'Financial Inclusion & MSME Lending (GRI 203)' },
-                            { x: 75, y: 85, r: 12, label: 'Climate Risk in Underwriting (GRI 201)' },
-                            { x: 90, y: 65, r: 10, label: 'Cybersecurity & Data Privacy (GRI 418)' },
-                            { x: 62, y: 80, r: 9, label: 'Gender Diversity in Leadership (GRI 405)' },
-                            { x: 50, y: 60, r: 7, label: 'Branch Energy & Waste (GRI 302/306)' },
-                            { x: 70, y: 55, r: 8, label: 'Anti-Corruption & AML (GRI 205)' }
-                        ],
-                        backgroundColor: 'rgba(236, 72, 153, 0.75)',
-                        borderColor: '#ffffff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => ` ${ctx.raw.label}: Financial (${ctx.raw.x}) / Impact (${ctx.raw.y})`
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Financial Materiality (Enterprise Value Impact)', color: '#64748b', font: { size: 10 } },
-                            min: 30, max: 100,
-                            grid: { color: '#f1f5f9' },
-                            ticks: { color: '#64748b' }
-                        },
-                        y: {
-                            title: { display: true, text: 'Socio-Environmental Impact Materiality', color: '#64748b', font: { size: 10 } },
-                            min: 30, max: 100,
-                            grid: { color: '#f1f5f9' },
-                            ticks: { color: '#64748b' }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Initialize Application
-        window.addEventListener('DOMContentLoaded', () => {
-            renderFacilitiesTable();
-            renderModule1Charts();
-            evaluateKgtDeal();
-        });
-    </script>
+    function exportSectorTableCSV() {
+      let csv = "Sector,% Portfolio,Bank Exposure (KES),Industry Value (KNBS 2025),Attribution Factor,Annual Sector Emissions,Financed Emissions (tCO2e),PCAF Tier\n";
+      sectorData.forEach(r => {
+        csv += `"${r.sector}",${(r.pct*100).toFixed(2)}%,${r.loanExp},${r.knbsVal},${(r.attr*100).toFixed(4)}%,${r.emis},${r.financed.toFixed(1)},Tier ${r.score}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'PCAF_Financed_Emissions_KNBS2025.csv');
+      a.click();
+    }
+  </script>
 </body>
 </html>
