@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capital ESG Platform | Dual Bank Compliance & CIREF Sponsor Engine</title>
+  <title>Capital ESG Platform | Bank Sustainability & Borrower Portal</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {
@@ -21,8 +23,10 @@
               accent: '#10B981',
               teal: '#0EA5E9',
               amber: '#F59E0B',
+              coral: '#F43F5E',
               indigo: '#6366F1',
-              ciref: '#2563EB'
+              borrower: '#1E40AF',
+              borrowerLight: '#3B82F6'
             }
           }
         }
@@ -39,12 +43,108 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-sage selection:text-white">
 
-  <!-- ================= TOP INSTITUTIONAL BAR WITH ROLE SWITCHER ================= -->
-  <header class="bg-brand-pine text-white border-b border-brand-dark sticky top-0 z-40 shadow-md">
+  <!-- ========================================================================= -->
+  <!-- 0. AUTHENTICATION SCREENS (LOGIN / SIGN UP)                                -->
+  <!-- ========================================================================= -->
+  <section id="auth-screen" class="min-h-screen flex items-center justify-center bg-slate-900 px-4 py-12 relative overflow-hidden">
+    <!-- Ambient Backdrop Highlights -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden relative z-10">
+      
+      <!-- Top Branding Strip -->
+      <div class="bg-brand-pine p-6 text-white text-center relative">
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-gradient-to-tr from-brand-accent via-brand-sage to-teal-300 p-0.5 shadow-lg flex items-center justify-center mb-3">
+          <div class="w-full h-full bg-brand-pine rounded-[14px] flex items-center justify-center">
+            <svg class="w-6 h-6 text-brand-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <polygon points="12,4 19,16 5,16" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="text-xl font-extrabold tracking-tight">CAPITAL ESG PLATFORM</h2>
+        <p class="text-xs text-brand-sage mt-1">Dual Bank Reporting Engine & Borrower Readiness Portal</p>
+
+        <!-- Login / Sign-up Sub-Toggle -->
+        <div class="flex items-center justify-center mt-5 bg-brand-dark/80 p-1 rounded-xl border border-brand-card">
+          <button id="auth-mode-login" onclick="toggleAuthForm('login')" class="w-1/2 py-1.5 text-xs font-bold rounded-lg bg-brand-sage text-brand-pine shadow transition-all">Sign In</button>
+          <button id="auth-mode-signup" onclick="toggleAuthForm('signup')" class="w-1/2 py-1.5 text-xs font-semibold rounded-lg text-slate-300 hover:text-white transition-all">Register</button>
+        </div>
+      </div>
+
+      <!-- Auth Form Container -->
+      <div class="p-6">
+        <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4 text-xs">
+          
+          <!-- Role Selector -->
+          <div>
+            <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1">Select Access Role</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-emerald-500 bg-emerald-50/50" id="role-label-lender">
+                <input type="radio" name="auth-role" value="lender" checked onchange="updateRoleStyling()" class="text-emerald-600 focus:ring-emerald-500 mr-2">
+                <div>
+                  <span class="font-bold text-slate-900 block">Bank / Lender</span>
+                  <span class="text-[10px] text-slate-500">Portfolio & Risk</span>
+                </div>
+              </label>
+              <label class="flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-slate-200" id="role-label-borrower">
+                <input type="radio" name="auth-role" value="borrower" onchange="updateRoleStyling()" class="text-blue-600 focus:ring-blue-500 mr-2">
+                <div>
+                  <span class="font-bold text-slate-900 block">Customer / Borrower</span>
+                  <span class="text-[10px] text-slate-500">Sponsor & SME</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Registration Field: Org Name -->
+          <div id="signup-name-field" class="hidden">
+            <label class="block font-semibold text-slate-700 mb-1">Entity / Organization Legal Name</label>
+            <input type="text" id="auth-org-name" placeholder="e.g., Prime Continental Bank or Rift Energy Ltd" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-brand-accent focus:outline-none">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Work Email Address</label>
+            <input type="email" id="auth-email" required value="risk.officer@capitalbank.co.ke" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-brand-accent focus:outline-none font-mono">
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Password</label>
+            <input type="password" id="auth-password" required value="••••••••••••" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-brand-accent focus:outline-none">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="auth-submit-btn" class="w-full py-3 bg-brand-pine hover:bg-brand-dark text-white rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center space-x-1.5 mt-2">
+            <span>Log In to Institutional Portal</span>
+            <svg class="w-4 h-4 text-brand-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+
+          <!-- Quick Test Demo Logins -->
+          <div class="pt-4 border-t border-slate-100 text-center">
+            <span class="text-[10px] text-slate-400 block mb-2">QUICK TEST SWITCH</span>
+            <div class="flex justify-center space-x-2">
+              <button type="button" onclick="quickFillAndLogin('lender')" class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-semibold">Demo Bank</button>
+              <button type="button" onclick="quickFillAndLogin('borrower')" class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-semibold">Demo Borrower</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- INSTITUTIONAL APP HEADER (PERSISTENT AFTER AUTHENTICATION)                 -->
+  <!-- ========================================================================= -->
+  <header id="app-header" class="bg-brand-pine text-white border-b border-brand-dark sticky top-0 z-40 shadow-md hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
-        <!-- Logo & Active Platform Mode Badge -->
+        <!-- Logo & Title -->
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-accent via-brand-sage to-teal-300 p-0.5 shadow-lg flex items-center justify-center">
             <div class="w-full h-full bg-brand-pine rounded-[10px] flex items-center justify-center">
@@ -57,103 +157,108 @@
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <span class="font-extrabold text-base tracking-tight text-white" id="brand-title">CAPITAL ESG</span>
-              <span id="role-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-dark text-brand-sage border border-brand-card">
-                LENDER PORTAL (CBK & PCAF)
+              <span class="font-extrabold text-base tracking-tight text-white" id="header-platform-title">CAPITAL ESG</span>
+              <span id="header-role-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-dark text-brand-sage border border-brand-card">
+                LENDER PORTAL
               </span>
             </div>
-            <p class="text-[11px] text-slate-300" id="brand-subtitle">Bank Sustainability & Financed Emissions Management Engine</p>
+            <p class="text-[11px] text-slate-300" id="header-platform-sub">Commercial Bank Financed Emissions & Sustainability Engine</p>
           </div>
         </div>
 
-        <!-- Global Header Controls: Role Selector, Currency, Actions -->
+        <!-- Global Header Controls: Currency, Switcher, Log Out -->
         <div class="flex items-center space-x-3">
           
-          <!-- PRIMARY DUAL-ROLE SELECTOR -->
-          <div class="bg-brand-dark p-1 rounded-xl border border-brand-card flex items-center">
-            <span class="text-[11px] text-slate-300 px-2 font-medium">Active Mode:</span>
-            <button id="btn-role-lender" onclick="switchUserRole('lender')" class="px-3 py-1 text-xs rounded-lg font-bold bg-brand-sage text-brand-pine shadow transition-all">
-              Bank / Lender
-            </button>
-            <button id="btn-role-borrower" onclick="switchUserRole('borrower')" class="px-3 py-1 text-xs rounded-lg font-semibold text-slate-300 hover:text-white transition-all">
-              Borrower / CIREF
-            </button>
+          <!-- Mode Indicator / Quick Switcher -->
+          <div class="hidden sm:flex bg-brand-dark p-1 rounded-xl border border-brand-card items-center text-xs">
+            <button id="top-btn-lender" onclick="switchActiveRole('lender')" class="px-2.5 py-1 rounded-lg font-bold bg-brand-sage text-brand-pine transition-all">Bank Mode</button>
+            <button id="top-btn-borrower" onclick="switchActiveRole('borrower')" class="px-2.5 py-1 rounded-lg font-semibold text-slate-300 hover:text-white transition-all">Customer Mode</button>
           </div>
 
           <!-- Currency Selector -->
-          <div class="hidden sm:flex bg-brand-dark p-1 rounded-lg border border-brand-card items-center text-xs">
-            <button id="curr-kes" onclick="setCurrency('KES')" class="px-2 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage transition-all">KES</button>
-            <button id="curr-usd" onclick="setCurrency('USD')" class="px-2 py-0.5 rounded font-semibold text-slate-300 hover:text-white transition-all">USD</button>
+          <div class="hidden md:flex bg-brand-dark p-1 rounded-lg border border-brand-card items-center text-xs">
+            <button id="curr-kes" onclick="setCurrency('KES')" class="px-2.5 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage transition-all">KES</button>
+            <button id="curr-usd" onclick="setCurrency('USD')" class="px-2.5 py-0.5 rounded font-semibold text-slate-300 hover:text-white transition-all">USD</button>
           </div>
 
-          <!-- Audit Action Button (Dynamic depending on role) -->
-          <button id="main-action-btn" onclick="handlePrimaryAction()" class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-lg text-xs font-semibold shadow flex items-center space-x-1.5 transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            <span id="main-action-label">Audit Package</span>
-          </button>
+          <!-- User Info & Logout Button -->
+          <div class="flex items-center space-x-2 border-l border-brand-card/80 pl-3">
+            <div class="text-right hidden lg:block">
+              <div class="text-xs font-bold text-white" id="user-display-name">Alex Kimilu</div>
+              <div class="text-[10px] text-brand-sage" id="user-display-org">Prime Continental Bank</div>
+            </div>
+            <button onclick="handleLogout()" title="Log Out" class="p-2 bg-brand-dark hover:bg-brand-card border border-brand-card text-slate-300 hover:text-white rounded-lg transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </button>
+          </div>
+
         </div>
 
       </div>
     </div>
 
-    <!-- FRAMEWORK NAVIGATION STRIP FOR LENDER VIEW (5 Modules) -->
-    <div id="lender-nav-strip" class="bg-brand-dark border-t border-brand-card/60">
+    <!-- ================= SUB-NAVIGATION: LENDER MODE (5 MODULES) ================= -->
+    <div id="lender-nav" class="bg-brand-dark border-t border-brand-card/60">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-1 overflow-x-auto custom-scrollbar py-1">
-          <button onclick="switchModule(1)" id="tab-mod-1" class="module-tab active px-3 py-1.5 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-brand-card shadow border-b-2 border-brand-sage">
+          <button onclick="switchLenderTab(1)" id="l-tab-1" class="px-3.5 py-2 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-brand-card shadow border-b-2 border-brand-sage">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
             <span>1. PCAF Financed Emissions</span>
-            <span class="text-[10px] font-normal px-1 bg-emerald-950/60 text-emerald-300 rounded">Credit Risk</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-emerald-950/60 text-emerald-300 rounded">Credit Risk</span>
           </button>
-          <button onclick="switchModule(2)" id="tab-mod-2" class="module-tab px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+          <button onclick="switchLenderTab(2)" id="l-tab-2" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
             <span class="w-2 h-2 rounded-full bg-sky-400"></span>
             <span>2. Kenya Green Taxonomy</span>
-            <span class="text-[10px] font-normal px-1 bg-sky-950/60 text-sky-300 rounded">Origination</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-sky-950/60 text-sky-300 rounded">Origination</span>
           </button>
-          <button onclick="switchModule(3)" id="tab-mod-3" class="module-tab px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+          <button onclick="switchLenderTab(3)" id="l-tab-3" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
             <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-            <span>3. CBK Climate Guidance</span>
-            <span class="text-[10px] font-normal px-1 bg-amber-950/60 text-amber-300 rounded">ERM</span>
+            <span>3. CBK Climate Risk Guidance</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-amber-950/60 text-amber-300 rounded">ERM</span>
           </button>
-          <button onclick="switchModule(4)" id="tab-mod-4" class="module-tab px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+          <button onclick="switchLenderTab(4)" id="l-tab-4" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
             <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
             <span>4. ISSB / IFRS S1 & S2</span>
-            <span class="text-[10px] font-normal px-1 bg-indigo-950/60 text-indigo-300 rounded">CFO Office</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-indigo-950/60 text-indigo-300 rounded">CFO Office</span>
           </button>
-          <button onclick="switchModule(5)" id="tab-mod-5" class="module-tab px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
+          <button onclick="switchLenderTab(5)" id="l-tab-5" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50">
             <span class="w-2 h-2 rounded-full bg-rose-400"></span>
-            <span>5. GRI Standards</span>
-            <span class="text-[10px] font-normal px-1 bg-rose-950/60 text-rose-300 rounded">Operations</span>
+            <span>5. GRI Standards & Materiality</span>
+            <span class="text-[10px] font-normal px-1.5 py-0.2 bg-rose-950/60 text-rose-300 rounded">HR & Ops</span>
           </button>
         </nav>
       </div>
     </div>
 
-    <!-- FRAMEWORK NAVIGATION STRIP FOR BORROWER / CIREF VIEW (4 Steps) -->
-    <div id="borrower-nav-strip" class="bg-blue-950 border-t border-blue-900 hidden">
+    <!-- ================= SUB-NAVIGATION: BORROWER / CUSTOMER MODE (4 SCREENS) ================= -->
+    <div id="borrower-nav" class="bg-blue-950 border-t border-blue-900 hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-1 overflow-x-auto custom-scrollbar py-1">
-          <button onclick="switchBorrowerTab(1)" id="b-tab-1" class="px-3 py-1.5 text-xs font-bold rounded-md whitespace-nowrap transition-all text-white bg-blue-800 shadow border-b-2 border-sky-400">
-            1. Project Profile & Financials
+          <button onclick="switchBorrowerTab(1)" id="b-tab-1" class="px-3.5 py-2 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-blue-800 shadow border-b-2 border-sky-400">
+            <span>Page 1: Project Financial Profile</span>
           </button>
-          <button onclick="switchBorrowerTab(2)" id="b-tab-2" class="px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all text-blue-200 hover:text-white hover:bg-blue-900/60">
-            2. Scope 1 & 2 Activity Data
+          <button onclick="switchBorrowerTab(2)" id="b-tab-2" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-blue-200 hover:text-white hover:bg-blue-900/60">
+            <span>Page 2: Scope 1 & 2 Carbon Calculator</span>
           </button>
-          <button onclick="switchBorrowerTab(3)" id="b-tab-3" class="px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all text-blue-200 hover:text-white hover:bg-blue-900/60">
-            3. KGT Taxonomy Verification
+          <button onclick="switchBorrowerTab(3)" id="b-tab-3" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-blue-200 hover:text-white hover:bg-blue-900/60">
+            <span>Page 3: Kenya Green Taxonomy Screener</span>
           </button>
-          <button onclick="switchBorrowerTab(4)" id="b-tab-4" class="px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all text-blue-200 hover:text-white hover:bg-blue-900/60">
-            4. CIREF Readiness Passport
+          <button onclick="switchBorrowerTab(4)" id="b-tab-4" class="px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-blue-200 hover:text-white hover:bg-blue-900/60">
+            <span>Page 4: ESG Readiness Passport & Bank Share</span>
           </button>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- ================= LENDER / BANK CONTAINER ================= -->
-  <div id="lender-container" class="flex-1 flex flex-col w-full">
+  <!-- ========================================================================= -->
+  <!-- ========================================================================= -->
+  <!-- 1. LENDER / BANK SUITE (COMPLETE WITH ALL 5 MODULE PAGES)                  -->
+  <!-- ========================================================================= -->
+  <!-- ========================================================================= -->
+  <div id="lender-suite" class="flex-1 flex flex-col w-full hidden">
     
-    <!-- Top Consolidated KPI Strip -->
+    <!-- Top Bank Consolidated KPI Banner -->
     <section class="bg-white border-b border-slate-200 py-3 shadow-xs">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
@@ -161,7 +266,7 @@
             <div>
               <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Gross Financed Emissions</div>
               <div class="text-xl font-bold text-slate-900 mt-0.5" id="kpi-gross-emissions">2,638,324 <span class="text-xs font-normal text-slate-500">tCO₂e</span></div>
-              <div class="text-[11px] text-emerald-600 font-semibold mt-0.5">↓ -4.2% vs 2025</div>
+              <div class="text-[11px] text-emerald-600 font-semibold mt-0.5">↓ -4.2% vs 2025 baseline</div>
             </div>
             <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">PCAF</div>
           </div>
@@ -178,7 +283,7 @@
           <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
             <div>
               <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">CBK Climate Preparedness</div>
-              <div class="text-xl font-bold text-slate-900 mt-0.5">91.4% <span class="text-xs font-normal text-slate-500">Pillars</span></div>
+              <div class="text-xl font-bold text-slate-900 mt-0.5">91.4% <span class="text-xs font-normal text-slate-500">Pillar Index</span></div>
               <div class="text-[11px] text-amber-600 font-semibold mt-0.5">ASAL Stress Simulated</div>
             </div>
             <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs">CBK</div>
@@ -186,9 +291,9 @@
 
           <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
             <div>
-              <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">ISSB Net-Zero Glidepath</div>
+              <div class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">ISSB S2 Glidepath</div>
               <div class="text-xl font-bold text-slate-900 mt-0.5">1.5°C Orderly</div>
-              <div class="text-[11px] text-indigo-600 font-semibold mt-0.5">-8.4% variance to curve</div>
+              <div class="text-[11px] text-indigo-600 font-semibold mt-0.5">-8.4% to SBTi curve</div>
             </div>
             <div class="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">ISSB</div>
           </div>
@@ -196,33 +301,56 @@
       </div>
     </section>
 
-    <!-- Main Lender Body -->
+    <!-- Main Lender Viewport -->
     <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
-      
-      <!-- MODULE 1: PCAF FINANCED EMISSIONS -->
-      <section id="module-1-screen" class="space-y-6">
+
+      <!-- ================= LENDER PAGE 1: PCAF FINANCED EMISSIONS ================= -->
+      <section id="lender-page-1" class="space-y-6">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center space-x-2">
               <span class="px-2.5 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-800 rounded-full border border-emerald-200">PCAF Scope 3 Cat 15 Engine</span>
-              <span class="text-xs text-slate-500">Reference: KNBS 2025 Economic Statistics</span>
+              <span class="text-xs text-slate-500">Calibrated to KNBS 2025 Economic Accounts</span>
             </div>
-            <h1 class="text-2xl font-bold text-slate-900 mt-1">Loan & Investment Portfolio Financed Emissions</h1>
-            <p class="text-xs text-slate-600 mt-0.5">Empirical attribution modeling calibrated to Bank Loan Portfolios (KES 59.54B book).</p>
+            <h1 class="text-2xl font-bold text-slate-900 mt-1">Loan & Investment Financed Emissions</h1>
+            <p class="text-xs text-slate-600 mt-0.5">Portfolio exposure: <strong class="text-emerald-700 font-mono">KES 59,536,466,218</strong> across 10 sectors & direct corporate facilities.</p>
           </div>
           <div class="flex items-center space-x-2 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
-            <button onclick="togglePCAFView('sector')" id="pcaf-btn-sector" class="px-3 py-1.5 rounded-lg font-bold bg-white text-slate-900 shadow-xs">Sector View</button>
-            <button onclick="togglePCAFView('asset')" id="pcaf-btn-asset" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 hover:text-slate-900">Direct Asset Tiers</button>
-            <button onclick="openIngestionModal()" class="px-3 py-1.5 rounded-lg font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs">+ Ingest Facility</button>
+            <button onclick="togglePCAFView('sector')" id="pcaf-btn-sector" class="px-3 py-1.5 rounded-lg font-bold bg-white text-slate-900 shadow-xs">KNBS Sector Book</button>
+            <button onclick="togglePCAFView('asset')" id="pcaf-btn-asset" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 hover:text-slate-900">Direct Assets (7 Tiers)</button>
+            <button onclick="openIngestionModal()" class="px-3 py-1.5 rounded-lg font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs">+ Ingest Deal</button>
           </div>
         </div>
 
-        <!-- Sector View Ledger -->
-        <div id="pcaf-sector-view" class="space-y-6">
+        <!-- Subview A: Sector Breakdown -->
+        <div id="pcaf-sub-sector" class="space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+              <h3 class="font-bold text-slate-900 text-sm">Sector Allocation vs. Financed Carbon Footprint</h3>
+              <p class="text-xs text-slate-500 mb-4">Loan Book Balance (KES Millions) vs. Attributed Carbon Footprint (tCO₂e)</p>
+              <div class="h-64">
+                <canvas id="sectorComparisonChart"></canvas>
+              </div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-sm">Portfolio Concentration</h3>
+                <p class="text-xs text-slate-500 mb-3">% Share of KES 59.54B Disbursed Exposure</p>
+                <div class="h-52 relative">
+                  <canvas id="sectorShareDonut"></canvas>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-500 text-center mt-2 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                Major Driver: <strong class="text-slate-800">Trade (36.3%)</strong> & <strong class="text-slate-800">Manufacturing (24.5%)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sector Data Table -->
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div class="px-5 py-3 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-              <h3 class="font-bold text-slate-900 text-sm">KNBS Sector Allocation & Financed Emissions Ledger</h3>
-              <button onclick="exportSectorTableCSV()" class="px-3 py-1 bg-white border border-slate-200 text-xs font-semibold rounded-lg hover:bg-slate-50">Export CSV</button>
+            <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+              <h3 class="font-bold text-slate-900 text-sm">KNBS Sector Attribution Ledger</h3>
+              <button onclick="exportSectorTableCSV()" class="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg text-xs font-semibold text-slate-700">Export CSV</button>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
@@ -231,7 +359,7 @@
                     <th class="py-3 px-4 font-bold">Sector</th>
                     <th class="py-3 px-4 font-bold">% Portfolio</th>
                     <th class="py-3 px-4 font-bold">Bank Exposure</th>
-                    <th class="py-3 px-4 font-bold">Industry Value</th>
+                    <th class="py-3 px-4 font-bold">Industry Value (KNBS)</th>
                     <th class="py-3 px-4 font-bold">Attribution Factor</th>
                     <th class="py-3 px-4 font-bold">Financed Emissions</th>
                     <th class="py-3 px-4 font-bold text-right">Data Quality</th>
@@ -243,235 +371,490 @@
           </div>
         </div>
 
-        <!-- Asset View Details -->
-        <div id="pcaf-asset-view" class="hidden space-y-4">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <h3 class="font-bold text-slate-900 text-sm mb-2">Primary Borrower Pipeline (Synchronized from CIREF Intake)</h3>
-            <div id="verified-borrower-list" class="space-y-2">
-              <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between text-xs">
-                <div>
-                  <strong class="text-blue-900">Lake Turkana Wind Expansion Project</strong>
-                  <div class="text-slate-500 font-mono">Borrower Type: Renewable IPP | Loan: KES 250,000,000 | EVIC: KES 1,000,000,000</div>
-                </div>
-                <div class="text-right">
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold">PCAF Tier 1 (Audited)</span>
-                  <div class="text-slate-700 font-semibold font-mono mt-1">Scope 1 & 2: 120 tCO₂e</div>
-                </div>
+        <!-- Subview B: Direct Asset Classes & Verified Borrower Feed -->
+        <div id="pcaf-sub-asset" class="space-y-6 hidden">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">✓</div>
+              <div>
+                <strong class="text-emerald-950 text-xs font-bold">Customer Verified Data Pipeline Active</strong>
+                <p class="text-[11px] text-emerald-800">Borrower submissions from the Customer Portal automatically feed into this ledger with PCAF Tier 1 Data Quality.</p>
               </div>
+            </div>
+            <span class="text-xs bg-emerald-200 text-emerald-900 px-2.5 py-1 rounded-lg font-bold">Live Synced</span>
+          </div>
+
+          <div id="verified-borrower-ledger" class="space-y-3">
+            <!-- Populated dynamically via JS when customer submits -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LENDER PAGE 2: KENYA GREEN TAXONOMY (KGT) ================= -->
+      <section id="lender-page-2" class="space-y-6 hidden">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex justify-between items-center">
+          <div>
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-sky-100 text-sky-800 rounded-full border border-sky-200">Kenya Green Taxonomy Standard</span>
+            <h2 class="text-2xl font-bold text-slate-900 mt-1">Green Asset Ratio (GAR) & Taxonomy Screening</h2>
+            <p class="text-xs text-slate-600 mt-0.5">Evaluating deals against KGT 6 Environmental Objectives and Do No Significant Harm (DNSH) rules.</p>
+          </div>
+          <div class="bg-sky-50 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-mono">
+            <span class="text-slate-600">Green Asset Ratio (GAR):</span> <strong class="text-sky-700 text-sm">18.42%</strong>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <h3 class="font-bold text-slate-900 text-sm">Deal Taxonomy Screener</h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Deal / Project Name</label>
+                <input type="text" id="kgt-deal-name" placeholder="e.g., Lake Turkana Wind Expansion" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">KGT Environmental Objective</label>
+                <select id="kgt-deal-obj" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+                  <option>1. Climate Change Mitigation</option>
+                  <option>2. Climate Change Adaptation</option>
+                  <option>3. Sustainable Water & Marine Resources</option>
+                  <option>4. Circular Economy & Waste Recovery</option>
+                  <option>5. Pollution Prevention & Control</option>
+                  <option>6. Protection of Healthy Ecosystems</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Facility Amount (KES Millions)</label>
+                <input type="number" id="kgt-deal-val" placeholder="250" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
+              </div>
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="chk-sc" class="rounded text-sky-600">
+                  <span>Meets Substantial Contribution (SC)</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="chk-dnsh" class="rounded text-sky-600">
+                  <span>Do No Significant Harm (DNSH) Verified</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="chk-mss" class="rounded text-sky-600">
+                  <span>Minimum Social Safeguards (Labor laws)</span>
+                </label>
+              </div>
+              <button onclick="runKGTScreening()" class="w-full py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold transition-all">Evaluate Deal Alignment</button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <h3 class="font-bold text-slate-900 text-sm">Taxonomy Aligned Volume by Objective</h3>
+            <p class="text-xs text-slate-500 mb-3">Eligible Book vs. Fully Aligned (KES Billions)</p>
+            <div class="h-64">
+              <canvas id="kgtChart"></canvas>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- MODULE 2: KENYA GREEN TAXONOMY -->
-      <section id="module-2-screen" class="hidden space-y-6">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-          <span class="px-2.5 py-0.5 text-xs font-bold bg-sky-100 text-sky-800 rounded-full border border-sky-200">Kenya Green Taxonomy Standard</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-2">Green Asset Ratio (GAR) & Deal Classification</h2>
-          <p class="text-xs text-slate-600">Verification of Technical Screening Criteria (SC) and Do No Significant Harm (DNSH) across loan tranches.</p>
-        </div>
-      </section>
-
-      <!-- MODULE 3: CBK CLIMATE GUIDANCE -->
-      <section id="module-3-screen" class="hidden space-y-6">
+      <!-- ================= LENDER PAGE 3: CBK CLIMATE RISK GUIDANCE ================= -->
+      <section id="lender-page-3" class="space-y-6 hidden">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
           <span class="px-2.5 py-0.5 text-xs font-bold bg-amber-100 text-amber-800 rounded-full border border-amber-200">Central Bank of Kenya</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-2">Supervisory Climate-Related Risk Preparedness</h2>
-          <p class="text-xs text-slate-600">Stress testing against ASAL county physical drought risks and transition capital buffers.</p>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Supervisory Risk Preparedness & Physical Stress Testing</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Physical hazard exposure mapping across Kenyan counties & climate transition capital buffer modeling.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <h3 class="font-bold text-slate-900 text-sm">CBK Supervisory 4 Pillars Progress</h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <div class="flex justify-between mb-1 font-semibold"><span>Pillar 1: Governance & Board Oversight</span><span class="text-emerald-600">95%</span></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[95%]"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1 font-semibold"><span>Pillar 2: Strategy & Business Model</span><span class="text-emerald-600">90%</span></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[90%]"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1 font-semibold"><span>Pillar 3: Risk Management Framework</span><span class="text-amber-600">88%</span></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-[88%]"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1 font-semibold"><span>Pillar 4: Metrics & Targets Disclosures</span><span class="text-emerald-600">92%</span></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[92%]"></div></div>
+              </div>
+            </div>
+
+            <!-- Stress Slider -->
+            <div class="pt-3 border-t border-slate-100">
+              <div class="flex justify-between items-center mb-1">
+                <label class="text-xs font-bold text-slate-800">Carbon Price Transition Shock</label>
+                <span id="tax-val" class="font-mono text-xs font-bold text-amber-600">$50 / tCO₂e</span>
+              </div>
+              <input type="range" id="tax-slider" min="10" max="150" step="5" value="50" oninput="updateStressTest(this.value)" class="w-full accent-amber-500">
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs space-y-1">
+              <div class="flex justify-between text-slate-600"><span>Projected NPL Jump:</span> <strong id="stress-npl" class="text-amber-800">+1.85%</strong></div>
+              <div class="flex justify-between text-slate-600"><span>Required Capital Buffer:</span> <strong id="stress-cap" class="text-amber-800">KES 820M</strong></div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <h3 class="font-bold text-slate-900 text-sm">County Physical Climate Hazard Vulnerability</h3>
+            <p class="text-xs text-slate-500 mb-3">Credit Exposure at Risk Across Kenya ASAL & Coastal Basins</p>
+            <div class="h-64">
+              <canvas id="cbkRiskChart"></canvas>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- MODULE 4: ISSB / IFRS S1 & S2 -->
-      <section id="module-4-screen" class="hidden space-y-6">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-          <span class="px-2.5 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-800 rounded-full border border-indigo-200">ISSB Framework</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-2">IFRS S2 Financed Metrics & 1.5°C Paris Transition Path</h2>
-          <p class="text-xs text-slate-600">Consolidated Scope 1, 2, and Category 15 financed portfolio trajectory.</p>
+      <!-- ================= LENDER PAGE 4: ISSB / IFRS S1 & S2 ================= -->
+      <section id="lender-page-4" class="space-y-6 hidden">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex justify-between items-center">
+          <div>
+            <span class="px-2.5 py-0.5 text-xs font-bold bg-indigo-100 text-indigo-800 rounded-full border border-indigo-200">ISSB / IFRS S1 & S2</span>
+            <h2 class="text-2xl font-bold text-slate-900 mt-1">General Sustainability & Climate-Related Disclosures</h2>
+            <p class="text-xs text-slate-600 mt-0.5">Consolidated GHG Scopes with forward 1.5°C Paris transition pathways.</p>
+          </div>
+          <div class="flex space-x-2 text-xs">
+            <button onclick="setISSBScenario('1.5')" id="btn-scen-15" class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-semibold shadow-xs">1.5°C Orderly</button>
+            <button onclick="setISSBScenario('2.0')" id="btn-scen-20" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg font-semibold hover:bg-slate-200">2.0°C Delayed</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+            <h3 class="font-bold text-slate-900 text-sm">Mandatory Scope 1-3 Inventory</h3>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 1 (Generator Diesel, Fleet)</span><strong class="font-mono">1,420 tCO₂e</strong></div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 2 (Branch Electricity / Kenya Grid)</span><strong class="font-mono">4,810 tCO₂e</strong></div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-50"><span>Scope 3 (Cat 1-14: Supply Chain, Paper)</span><strong class="font-mono">8,950 tCO₂e</strong></div>
+              <div class="flex justify-between p-2 rounded-lg bg-indigo-50 border border-indigo-100 font-bold text-indigo-900">
+                <span>Scope 3 (Cat 15: Financed Portfolio)</span>
+                <strong class="font-mono">2,623,334 tCO₂e</strong>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400">Financed emissions represent 99.4% of total bank carbon footprint.</p>
+          </div>
+
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <h3 class="font-bold text-slate-900 text-sm">IFRS S2 Forward Decarbonization Trajectory (2025–2050)</h3>
+            <p class="text-xs text-slate-500 mb-3">Portfolio Glidepath vs SBTi Net-Zero Target</p>
+            <div class="h-64">
+              <canvas id="issbChart"></canvas>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- MODULE 5: GRI STANDARDS -->
-      <section id="module-5-screen" class="hidden space-y-6">
+      <!-- ================= LENDER PAGE 5: GRI STANDARDS & MATERIALITY ================= -->
+      <section id="lender-page-5" class="space-y-6 hidden">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-          <span class="px-2.5 py-0.5 text-xs font-bold bg-rose-100 text-rose-800 rounded-full border border-rose-200">GRI Standards</span>
-          <h2 class="text-xl font-bold text-slate-900 mt-2">Operational Double Materiality & Facilities Impact</h2>
-          <p class="text-xs text-slate-600">Internal bank operations: Branch power consumption, diversity ratios, and community impact.</p>
+          <span class="px-2.5 py-0.5 text-xs font-bold bg-rose-100 text-rose-800 rounded-full border border-rose-200">GRI Universal Standards</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Double Materiality Matrix & Operations Logging</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Capturing internal facilities energy use, gender diversity, and socio-economic impact.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <h3 class="font-bold text-slate-900 text-sm">Branch Operations Gateway</h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Branch Facility</label>
+                <select class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+                  <option>Nairobi Head Office (Upper Hill)</option>
+                  <option>Mombasa Regional Hub</option>
+                  <option>Kisumu Hub</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Power Consumption (kWh)</label>
+                <input type="number" placeholder="45,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Female Management Ratio (%)</label>
+                <input type="number" placeholder="46.5" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
+              </div>
+              <button onclick="alert('Operations entry recorded to GRI 101/102 Disclosure Index.')" class="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold transition-all">Submit Operation Log</button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <h3 class="font-bold text-slate-900 text-sm">2D Double Materiality Matrix</h3>
+            <p class="text-xs text-slate-500 mb-3">Financial Materiality (Outside-In) vs. Impact Materiality (Inside-Out)</p>
+            <div class="h-64">
+              <canvas id="griMaterialityChart"></canvas>
+            </div>
+          </div>
         </div>
       </section>
 
     </main>
   </div>
 
-  <!-- ================= BORROWER / CIREF CONTAINER ================= -->
-  <div id="borrower-container" class="flex-1 flex flex-col w-full hidden">
+  <!-- ========================================================================= -->
+  <!-- ========================================================================= -->
+  <!-- 2. BORROWER / CUSTOMER SUITE (COMPLETE WITH ALL 4 WORKFLOW PAGES)          -->
+  <!-- ========================================================================= -->
+  <!-- ========================================================================= -->
+  <div id="borrower-suite" class="flex-1 flex flex-col w-full hidden">
     
-    <!-- Borrower Subheader Banner -->
+    <!-- Customer Mode Subheader -->
     <section class="bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 text-white py-6 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/30 text-blue-200 rounded-full border border-blue-400/40">
+              BORROWER READINESS & CERTIFICATION
+            </span>
+            <span class="text-xs text-blue-300">Customer Financing Portal</span>
+          </div>
+          <h1 class="text-2xl font-black text-white mt-1">Project ESG Diagnostic & Investor Readiness</h1>
+          <p class="text-xs text-blue-200 mt-0.5">Calculate your primary operational carbon footprint, test green taxonomy eligibility, and generate your bank compliance dossier.</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 flex items-center space-x-4">
           <div>
-            <div class="flex items-center space-x-2">
-              <span class="px-2.5 py-0.5 text-[10px] font-bold bg-blue-500/20 text-blue-300 rounded-full border border-blue-400/30">
-                CIREF INVESTOR-READINESS SUITE
-              </span>
-              <span class="text-xs text-slate-300">Target: Commercial Lending & DFI Capital</span>
-            </div>
-            <h1 class="text-2xl font-black tracking-tight text-white mt-1">Project ESG Diagnostic & Certification Engine</h1>
-            <p class="text-xs text-blue-200 mt-0.5">Calculate your project's carbon intensity, confirm Kenya Green Taxonomy alignment, and generate an audited ESG Compliance Passport.</p>
+            <div class="text-[10px] text-blue-200 font-semibold uppercase">ESG Bankability Score</div>
+            <div class="text-2xl font-black text-sky-300 font-mono" id="b-readiness-score-display">86 / 100</div>
           </div>
-          
-          <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10 text-right">
-            <div class="text-[11px] text-blue-200 uppercase font-semibold">CIREF Readiness Score</div>
-            <div class="text-2xl font-black text-sky-400 font-mono" id="ciref-score-display">84 / 100</div>
-            <div class="text-[10px] text-emerald-400 font-semibold">● Ready for Green Concessional Loan</div>
-          </div>
+          <span class="px-2 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-bold rounded-lg">Green Loan Eligible</span>
         </div>
       </div>
     </section>
 
-    <!-- Borrower Content Steps -->
+    <!-- Main Customer Viewport -->
     <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
-      
-      <!-- STEP 1 & 2: INPUTS & ACTIVITY DATA -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- Left: Project Profile & Data Intake -->
-        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
+
+      <!-- ================= BORROWER PAGE 1: PROJECT PROFILE & FINANCIALS ================= -->
+      <section id="borrower-page-1" class="space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
           <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
-            <h3 class="font-bold text-slate-900 text-sm">1. Facility Operational & Activity Data Entry</h3>
-            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Primary Data (Score 1/2)</span>
+            <div>
+              <h2 class="text-lg font-bold text-slate-900">Page 1: Project & Financial Valuation Profile</h2>
+              <p class="text-xs text-slate-500">Provide legal entity details and financial balance structure to establish attribution ratios.</p>
+            </div>
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg text-xs font-bold font-mono">Step 1 of 4</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Company / Project Legal Entity</label>
-              <input type="text" id="b-entity-name" value="Nairobi Solar Biofuel Co. Ltd" class="w-full border border-slate-200 rounded-lg p-2.5 focus:border-blue-500 focus:outline-none">
+              <label class="block font-semibold text-slate-700 mb-1">Company / Project Legal Name</label>
+              <input type="text" id="cust-entity-name" value="Rift Valley Eco-Energy Ltd" class="w-full border border-slate-200 rounded-lg p-2.5 font-semibold text-slate-800">
             </div>
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Sector (KNBS Classification)</label>
-              <select id="b-sector" class="w-full border border-slate-200 rounded-lg p-2.5 bg-white">
-                <option>Energy & Water</option>
+              <label class="block font-semibold text-slate-700 mb-1">Industry Sector (KNBS Equivalent)</label>
+              <select id="cust-sector" class="w-full border border-slate-200 rounded-lg p-2.5 bg-white">
+                <option selected>Energy & Water</option>
                 <option>Manufacturing</option>
                 <option>Agriculture</option>
                 <option>Transport & Comm.</option>
                 <option>Real Estate</option>
+                <option>Trade</option>
               </select>
             </div>
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Requested Loan Facility (KES)</label>
-              <input type="number" id="b-loan-req" value="50000000" class="w-full border border-slate-200 rounded-lg p-2.5 font-mono">
+              <label class="block font-semibold text-slate-700 mb-1">Requested Credit Facility (KES)</label>
+              <input type="number" id="cust-loan-amount" value="50000000" oninput="recalcCustomerMetrics()" class="w-full border border-slate-200 rounded-lg p-2.5 font-mono text-slate-800">
             </div>
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Enterprise Value (EVIC / Assets KES)</label>
-              <input type="number" id="b-evic-val" value="200000000" class="w-full border border-slate-200 rounded-lg p-2.5 font-mono">
+              <label class="block font-semibold text-slate-700 mb-1">Enterprise Value / Total Assets (EVIC in KES)</label>
+              <input type="number" id="cust-evic-amount" value="200000000" oninput="recalcCustomerMetrics()" class="w-full border border-slate-200 rounded-lg p-2.5 font-mono text-slate-800">
             </div>
           </div>
 
-          <div class="border-t border-slate-100 pt-4">
-            <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3 text-blue-900">Direct Activity Data (Primary Carbon Footprint)</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80">
-                <label class="block text-slate-600 font-medium mb-1">Annual Grid Electricity (kWh)</label>
-                <input type="number" id="b-kwh" value="380000" oninput="recalcBorrowerEmissions()" class="w-full border border-slate-200 rounded p-1.5 font-mono bg-white">
-                <span class="text-[10px] text-slate-400 mt-1 block">Kenya Grid EF: ~0.28 kgCO₂e/kWh</span>
-              </div>
-              <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80">
-                <label class="block text-slate-600 font-medium mb-1">Diesel Consumption (Liters)</label>
-                <input type="number" id="b-diesel" value="12500" oninput="recalcBorrowerEmissions()" class="w-full border border-slate-200 rounded p-1.5 font-mono bg-white">
-                <span class="text-[10px] text-slate-400 mt-1 block">Diesel EF: 2.68 kgCO₂e/L</span>
-              </div>
-              <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80">
-                <label class="block text-slate-600 font-medium mb-1">Heavy Fuel Oil / LPG (kg)</label>
-                <input type="number" id="b-gas" value="4000" oninput="recalcBorrowerEmissions()" class="w-full border border-slate-200 rounded p-1.5 font-mono bg-white">
-                <span class="text-[10px] text-slate-400 mt-1 block">Combustion EF: 2.98 kgCO₂e/kg</span>
-              </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center justify-between text-xs">
+            <span class="text-blue-900 font-medium">Calculated Bank Attribution Factor:</span>
+            <span class="text-base font-bold text-blue-700 font-mono" id="cust-attr-preview">25.00%</span>
+          </div>
+
+          <div class="flex justify-end">
+            <button onclick="switchBorrowerTab(2)" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow transition-all">Proceed to Carbon Accounting →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BORROWER PAGE 2: SCOPE 1 & 2 OPERATIONAL CARBON CALCULATOR ================= -->
+      <section id="borrower-page-2" class="space-y-6 hidden">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
+          <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+            <div>
+              <h2 class="text-lg font-bold text-slate-900">Page 2: Scope 1 & 2 Operational Activity Data</h2>
+              <p class="text-xs text-slate-500">Enter primary utility invoices and fuel records. These convert directly to verified PCAF Tier 1 / 2 data.</p>
+            </div>
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg text-xs font-bold font-mono">Step 2 of 4</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label class="block font-bold text-slate-700 mb-1">Annual Electricity Consumption (kWh)</label>
+              <input type="number" id="cust-kwh" value="380000" oninput="recalcCustomerMetrics()" class="w-full border border-slate-200 rounded-lg p-2 font-mono bg-white">
+              <span class="text-[10px] text-slate-500 mt-1 block">Kenya Grid Emission Factor: 0.28 kgCO₂e/kWh</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label class="block font-bold text-slate-700 mb-1">Generator & Fleet Diesel (Liters)</label>
+              <input type="number" id="cust-diesel" value="14200" oninput="recalcCustomerMetrics()" class="w-full border border-slate-200 rounded-lg p-2 font-mono bg-white">
+              <span class="text-[10px] text-slate-500 mt-1 block">Diesel Standard EF: 2.68 kgCO₂e/Liter</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label class="block font-bold text-slate-700 mb-1">Heavy Fuel Oil / LPG (kg)</label>
+              <input type="number" id="cust-lpg" value="4500" oninput="recalcCustomerMetrics()" class="w-full border border-slate-200 rounded-lg p-2 font-mono bg-white">
+              <span class="text-[10px] text-slate-500 mt-1 block">LPG Standard EF: 2.98 kgCO₂e/kg</span>
             </div>
           </div>
 
-          <!-- KGT Checklist -->
-          <div class="border-t border-slate-100 pt-4 space-y-2 text-xs">
-            <h4 class="font-bold text-slate-900 uppercase tracking-wider text-blue-900">2. Kenya Green Taxonomy Self-Check</h4>
-            <label class="flex items-center space-x-2">
-              <input type="checkbox" id="b-chk-sc" checked class="rounded text-blue-600">
-              <span class="text-slate-700">Meets Substantial Contribution threshold for selected KNBS sector</span>
-            </label>
-            <label class="flex items-center space-x-2">
-              <input type="checkbox" id="b-chk-dnsh" checked class="rounded text-blue-600">
-              <span class="text-slate-700">Environmental Impact Assessment (NEMA-compliant) verifies DNSH</span>
-            </label>
-            <label class="flex items-center space-x-2">
-              <input type="checkbox" id="b-chk-labor" checked class="rounded text-blue-600">
-              <span class="text-slate-700">Satisfies Kenya Employment Act Minimum Social Safeguards</span>
-            </label>
+          <!-- Live Breakdown Result Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-100 border border-slate-200">
+              <span class="text-slate-500 font-medium">Scope 1 (Direct Fuel)</span>
+              <div class="text-lg font-bold text-slate-900 font-mono mt-1" id="cust-scope1-res">51.5 tCO₂e</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-100 border border-slate-200">
+              <span class="text-slate-500 font-medium">Scope 2 (Purchased Electricity)</span>
+              <div class="text-lg font-bold text-slate-900 font-mono mt-1" id="cust-scope2-res">106.4 tCO₂e</div>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+              <span class="text-blue-700 font-bold">Total Operational Carbon</span>
+              <div class="text-lg font-bold text-blue-900 font-mono mt-1" id="cust-total-res">157.9 tCO₂e</div>
+            </div>
           </div>
 
-          <div class="pt-3">
-            <button onclick="submitBorrowerToBankPool()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center space-x-2">
-              <span>Certify & Submit Verified Dossier to Bank Portfolio</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <div class="flex justify-between items-center pt-2">
+            <button onclick="switchBorrowerTab(1)" class="text-xs text-slate-500 font-semibold hover:text-slate-800">← Back to Profile</button>
+            <button onclick="switchBorrowerTab(3)" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow transition-all">Proceed to Taxonomy Check →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BORROWER PAGE 3: KENYA GREEN TAXONOMY SCREENER ================= -->
+      <section id="borrower-page-3" class="space-y-6 hidden">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
+          <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+            <div>
+              <h2 class="text-lg font-bold text-slate-900">Page 3: Kenya Green Taxonomy (KGT) Self-Assessment</h2>
+              <p class="text-xs text-slate-500">Confirm project compliance to unlock concessional green credit terms from the lender.</p>
+            </div>
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg text-xs font-bold font-mono">Step 3 of 4</span>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 transition-all">
+              <label class="flex items-start space-x-3 cursor-pointer">
+                <input type="checkbox" id="cust-chk-sc" checked class="mt-0.5 rounded text-blue-600 focus:ring-blue-500">
+                <div>
+                  <strong class="text-slate-900 block font-bold">Substantial Contribution to Climate Change Mitigation / Adaptation</strong>
+                  <p class="text-slate-500 mt-0.5">Asset directly reduces emissions, deploys renewables, or enhances community climate resilience per official KGT thresholds.</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 transition-all">
+              <label class="flex items-start space-x-3 cursor-pointer">
+                <input type="checkbox" id="cust-chk-dnsh" checked class="mt-0.5 rounded text-blue-600 focus:ring-blue-500">
+                <div>
+                  <strong class="text-slate-900 block font-bold">Do No Significant Harm (DNSH) Principle</strong>
+                  <p class="text-slate-500 mt-0.5">Facility does not cause negative impacts on water resources, circular economy, pollution thresholds, or protected natural habitats.</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 hover:border-blue-400 transition-all">
+              <label class="flex items-start space-x-3 cursor-pointer">
+                <input type="checkbox" id="cust-chk-mss" checked class="mt-0.5 rounded text-blue-600 focus:ring-blue-500">
+                <div>
+                  <strong class="text-slate-900 block font-bold">Minimum Social Safeguards (Labor & Community Standards)</strong>
+                  <p class="text-slate-500 mt-0.5">Satisfies Kenya Employment Act, occupational health and safety regulations, and community land rights requirements.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center pt-2">
+            <button onclick="switchBorrowerTab(2)" class="text-xs text-slate-500 font-semibold hover:text-slate-800">← Back to Carbon Calculator</button>
+            <button onclick="switchBorrowerTab(4)" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow transition-all">Generate Passport & Finish →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BORROWER PAGE 4: ESG PASSPORT & BANK SHARE ================= -->
+      <section id="borrower-page-4" class="space-y-6 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Left: Digital Compliance Passport -->
+          <div class="lg:col-span-2 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white p-7 rounded-3xl shadow-xl border border-blue-800 space-y-6 relative overflow-hidden">
+            <div class="flex justify-between items-center">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold rounded-lg border border-blue-400/30">
+                OFFICIAL BORROWER ESG PASSPORT
+              </span>
+              <span class="text-xs text-emerald-400 font-mono font-bold">VERIFIED FY 2026</span>
+            </div>
+
+            <div>
+              <div class="text-xs text-slate-400 uppercase tracking-widest">Certified Corporate Entity</div>
+              <h3 class="text-2xl font-black text-white mt-1" id="pass-display-name">Rift Valley Eco-Energy Ltd</h3>
+              <div class="text-xs text-blue-200 mt-0.5 font-mono" id="pass-display-sector">Sector: Energy & Water | Kenya</div>
+            </div>
+
+            <!-- Metric Badges -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+              <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+                <span class="text-[10px] text-slate-400 block">Total GHG Footprint</span>
+                <strong class="text-sm text-white" id="pass-total-ghg">157.9 tCO₂e</strong>
+              </div>
+              <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+                <span class="text-[10px] text-slate-400 block">PCAF Quality Score</span>
+                <strong class="text-sm text-sky-300">Tier 1 (Audited)</strong>
+              </div>
+              <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+                <span class="text-[10px] text-slate-400 block">KGT Taxonomy</span>
+                <strong class="text-sm text-emerald-300">100% Aligned</strong>
+              </div>
+              <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+                <span class="text-[10px] text-slate-400 block">Attributed Carbon</span>
+                <strong class="text-sm text-amber-300" id="pass-attr-ghg">39.5 tCO₂e</strong>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs text-slate-400">
+              <span>Standard: PCAF Scope 3 Cat 15 & KGT v1.0</span>
+              <button onclick="alert('Digital ESG Passport downloaded as signed PDF.')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg border border-white/20 transition-all font-semibold">Download PDF</button>
+            </div>
+          </div>
+
+          <!-- Right: Direct Submission to Bank Ledger -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Direct Synchronization to Bank</h3>
+              <p class="text-xs text-slate-500 mt-1">Submit this verified data directly into the Commercial Bank's Financed Emissions Ledger. This upgrades the bank's data quality from Tier 4 (proxy) to Tier 1 (primary activity data).</p>
+              
+              <div class="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs space-y-2">
+                <div class="flex justify-between"><span>Bank Target:</span> <strong class="text-slate-800">Prime Continental Bank</strong></div>
+                <div class="flex justify-between"><span>Credit Class:</span> <strong>Category 1 (Business Loan)</strong></div>
+                <div class="flex justify-between"><span>Regulatory Status:</span> <strong class="text-emerald-700">CBK & ISSB Ready</strong></div>
+              </div>
+            </div>
+
+            <button onclick="submitCustomerDataToBank()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Transmit & Append to Bank Portfolio</span>
             </button>
           </div>
-        </div>
-
-        <!-- Right: Diagnostic Output & CIREF Passport -->
-        <div class="space-y-4">
-          
-          <!-- Live Carbon Diagnostic -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-            <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-slate-500">Live Carbon Audit</h3>
-            <div class="space-y-2 text-xs">
-              <div class="flex justify-between p-2 bg-slate-50 rounded-lg">
-                <span class="text-slate-600">Scope 1 (Direct Fuel):</span>
-                <strong class="font-mono text-slate-900" id="b-scope1-calc">45.4 tCO₂e</strong>
-              </div>
-              <div class="flex justify-between p-2 bg-slate-50 rounded-lg">
-                <span class="text-slate-600">Scope 2 (Grid Electricity):</span>
-                <strong class="font-mono text-slate-900" id="b-scope2-calc">106.4 tCO₂e</strong>
-              </div>
-              <div class="flex justify-between p-2.5 bg-blue-50 border border-blue-200 rounded-lg font-bold text-blue-950">
-                <span>Total Scope 1 + 2 Footprint:</span>
-                <span class="font-mono text-blue-700" id="b-total-calc">151.8 tCO₂e</span>
-              </div>
-            </div>
-            <div class="text-[11px] text-slate-500">
-              Loan Attribution Factor: <span class="font-bold text-slate-800 font-mono" id="b-attr-preview">25.00%</span>
-            </div>
-          </div>
-
-          <!-- Digital CIREF Compliance Passport Card -->
-          <div class="bg-gradient-to-br from-slate-900 to-blue-950 text-white p-5 rounded-2xl shadow-md border border-blue-800 relative overflow-hidden">
-            <div class="flex justify-between items-center mb-3">
-              <span class="px-2 py-0.5 bg-blue-500/30 text-blue-200 text-[10px] font-bold rounded border border-blue-400/40">CIREF PASSPORT</span>
-              <span class="text-[10px] text-emerald-400 font-mono">VERIFIED 2026</span>
-            </div>
-            <h4 class="font-bold text-sm text-white" id="pass-entity">Nairobi Solar Biofuel Co. Ltd</h4>
-            <div class="mt-3 space-y-1.5 text-xs text-slate-300 font-mono">
-              <div class="flex justify-between"><span>Taxonomy Status:</span> <strong class="text-emerald-400">KGT-Aligned (GAR)</strong></div>
-              <div class="flex justify-between"><span>PCAF Data Quality:</span> <strong class="text-sky-300">Tier 1 Primary</strong></div>
-              <div class="flex justify-between"><span>Bankability Rating:</span> <strong class="text-amber-400">A- (Investment Grade)</strong></div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-white/10 flex justify-between items-center">
-              <span class="text-[10px] text-slate-400">Issued by CIREF Diagnostics</span>
-              <button onclick="downloadPassport()" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-[11px] font-semibold border border-white/20">
-                Download PDF
-              </button>
-            </div>
-          </div>
 
         </div>
-
-      </div>
+      </section>
 
     </main>
   </div>
 
-  <!-- ================= INGESTION MODAL FOR CREDIT RISK (PCAF) ================= -->
+  <!-- ========================================================================= -->
+  <!-- MODAL: MANUAL INGESTION MODAL FOR LENDER                                  -->
+  <!-- ========================================================================= -->
   <div id="ingest-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-2xl max-w-lg w-full mx-4 shadow-2xl border border-slate-200 overflow-hidden">
       <div class="px-6 py-4 bg-brand-pine text-white flex justify-between items-center">
         <div>
           <h3 class="font-bold text-base">Ingest New Credit Facility</h3>
-          <p class="text-xs text-brand-sage">PCAF Financed Carbon Footprint Calculator</p>
+          <p class="text-xs text-brand-sage">Manual PCAF Attribution Calculator</p>
         </div>
         <button onclick="closeIngestionModal()" class="text-slate-300 hover:text-white text-lg">&times;</button>
       </div>
@@ -479,7 +862,7 @@
       <div class="p-6 space-y-3 text-xs">
         <div>
           <label class="block font-semibold text-slate-700 mb-1">Borrower / Asset Name</label>
-          <input type="text" id="m-name" placeholder="e.g., Rift Valley Agribusiness Ltd" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
+          <input type="text" id="m-name" placeholder="e.g., Athi River Logistics Ltd" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
@@ -489,16 +872,17 @@
               <option>Manufacturing</option>
               <option>Agriculture</option>
               <option>Energy & Water</option>
+              <option>Transport & Comm.</option>
               <option>Real Estate</option>
               <option>Trade</option>
             </select>
           </div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">PCAF Tier</label>
+            <label class="block font-semibold text-slate-700 mb-1">PCAF Data Quality Tier</label>
             <select id="m-score" class="w-full border border-slate-200 rounded-lg p-2 text-xs">
               <option value="1">Score 1 (Audited Primary Data)</option>
               <option value="2">Score 2 (Non-Audited Energy Bills)</option>
-              <option value="4">Score 4 (National Economic Proxies)</option>
+              <option value="4">Score 4 (National KNBS Proxies)</option>
             </select>
           </div>
         </div>
@@ -509,26 +893,28 @@
             <input type="number" id="m-loan" placeholder="5,000,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
           </div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Borrower EVIC (KES)</label>
+            <label class="block font-semibold text-slate-700 mb-1">Borrower EVIC / Assets (KES)</label>
             <input type="number" id="m-evic" placeholder="20,000,000" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
           </div>
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-700 mb-1">Reported GHG Emissions (tCO₂e)</label>
-          <input type="number" id="m-emiss" placeholder="1,200" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
+          <label class="block font-semibold text-slate-700 mb-1">Reported GHG Footprint (tCO₂e)</label>
+          <input type="number" id="m-emiss" placeholder="12,500" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-mono">
         </div>
 
-        <button onclick="commitNewFacility()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs shadow transition-all">
-          Append to Bank Portfolio
+        <button onclick="commitManualFacility()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs shadow transition-all">
+          Calculate & Commit to Portfolio Ledger
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT APPLICATION CORE (STATE, AUTH, ROUTING, CHARTS)                 -->
+  <!-- ========================================================================= -->
   <script>
-    // Exact KNBS 2025 Sector Ledger Data
+    // --- 1. SECTOR DATA & CALIBRATION (KNBS 2025 BASELINE) ---
     const sectorData = [
       { sector: "Trade", pct: 0.3628, loanExp: 21599829944, knbsVal: 1219711000000, attr: 0.017709, emis: 1100000, financed: 19479.9, score: 4 },
       { sector: "Manufacturing", pct: 0.2449, loanExp: 14580480577, knbsVal: 1176393000000, attr: 0.012394, emis: 5800000, financed: 71886.5, score: 4 },
@@ -542,135 +928,229 @@
       { sector: "Energy & Water", pct: 0.0058, loanExp: 345311504, knbsVal: 359307000000, attr: 0.000961, emis: 21500000, financed: 20662.5, score: 4 }
     ];
 
-    let currentRole = 'lender'; // 'lender' or 'borrower'
+    // --- 2. GLOBAL APPLICATION STATE ---
+    let currentUser = null; // null when logged out; or { email, role, org }
     let currentCurrency = 'KES';
-    let currentModule = 1;
+    let currentLenderTab = 1;
+    let currentBorrowerTab = 1;
 
-    window.addEventListener('DOMContentLoaded', () => {
-      renderSectorTable();
-      recalcBorrowerEmissions();
-    });
+    // Chart references
+    let sectorBarChart, sectorDonutChart, kgtChartInstance, cbkChartInstance, issbChartInstance, griChartInstance;
 
-    // --- ROLE SWITCHING ENGINE ---
-    function switchUserRole(role) {
-      currentRole = role;
-      const lenderCont = document.getElementById('lender-container');
-      const borrowerCont = document.getElementById('borrower-container');
-      const lenderNav = document.getElementById('lender-nav-strip');
-      const borrowerNav = document.getElementById('borrower-nav-strip');
-      const roleBadge = document.getElementById('role-badge');
-      const brandTitle = document.getElementById('brand-title');
-      const brandSubtitle = document.getElementById('brand-subtitle');
-      const btnLender = document.getElementById('btn-role-lender');
-      const btnBorrower = document.getElementById('btn-role-borrower');
-      const mainActionLabel = document.getElementById('main-action-label');
+    // --- 3. AUTHENTICATION & LOGIN LOGIC ---
+    function toggleAuthForm(mode) {
+      const isLogin = mode === 'login';
+      document.getElementById('signup-name-field').classList.toggle('hidden', isLogin);
+      document.getElementById('auth-submit-btn').querySelector('span').innerText = isLogin ? 'Log In to Institutional Portal' : 'Create & Register Account';
+      document.getElementById('auth-mode-login').className = isLogin ? "w-1/2 py-1.5 text-xs font-bold rounded-lg bg-brand-sage text-brand-pine shadow transition-all" : "w-1/2 py-1.5 text-xs font-semibold rounded-lg text-slate-300 hover:text-white transition-all";
+      document.getElementById('auth-mode-signup').className = !isLogin ? "w-1/2 py-1.5 text-xs font-bold rounded-lg bg-brand-sage text-brand-pine shadow transition-all" : "w-1/2 py-1.5 text-xs font-semibold rounded-lg text-slate-300 hover:text-white transition-all";
+    }
 
-      if (role === 'borrower') {
-        lenderCont.classList.add('hidden');
-        lenderNav.classList.add('hidden');
-        borrowerCont.classList.remove('hidden');
-        borrowerNav.classList.remove('hidden');
+    function updateRoleStyling() {
+      const selected = document.querySelector('input[name="auth-role"]:checked').value;
+      const lenderLabel = document.getElementById('role-label-lender');
+      const borrowerLabel = document.getElementById('role-label-borrower');
 
-        roleBadge.innerText = 'CIREF SPONSOR PORTAL';
-        roleBadge.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-blue-900 text-sky-300 border border-blue-700';
-        brandTitle.innerText = 'CAPITAL ESG | CIREF';
-        brandSubtitle.innerText = 'Asset-Level ESG Certification & Investor Readiness Engine';
-
-        btnBorrower.className = 'px-3 py-1 text-xs rounded-lg font-bold bg-blue-600 text-white shadow transition-all';
-        btnLender.className = 'px-3 py-1 text-xs rounded-lg font-semibold text-slate-300 hover:text-white transition-all';
-        mainActionLabel.innerText = 'Export Passport';
+      if (selected === 'lender') {
+        lenderLabel.className = "flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-emerald-500 bg-emerald-50/50";
+        borrowerLabel.className = "flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-slate-200";
+        document.getElementById('auth-email').value = "risk.officer@capitalbank.co.ke";
       } else {
-        borrowerCont.classList.add('hidden');
-        borrowerNav.classList.add('hidden');
-        lenderCont.classList.remove('hidden');
-        lenderNav.classList.remove('hidden');
-
-        roleBadge.innerText = 'LENDER PORTAL (CBK & PCAF)';
-        roleBadge.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-brand-dark text-brand-sage border border-brand-card';
-        brandTitle.innerText = 'CAPITAL ESG';
-        brandSubtitle.innerText = 'Bank Sustainability & Financed Emissions Management Engine';
-
-        btnLender.className = 'px-3 py-1 text-xs rounded-lg font-bold bg-brand-sage text-brand-pine shadow transition-all';
-        btnBorrower.className = 'px-3 py-1 text-xs rounded-lg font-semibold text-slate-300 hover:text-white transition-all';
-        mainActionLabel.innerText = 'Audit Package';
+        borrowerLabel.className = "flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-blue-500 bg-blue-50/50";
+        lenderLabel.className = "flex items-center p-2.5 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all border-slate-200";
+        document.getElementById('auth-email').value = "cfo@ecoenergy.co.ke";
       }
     }
 
-    // --- BORROWER / CIREF CALCULATIONS ---
-    function recalcBorrowerEmissions() {
-      const kwh = parseFloat(document.getElementById('b-kwh').value) || 0;
-      const diesel = parseFloat(document.getElementById('b-diesel').value) || 0;
-      const gas = parseFloat(document.getElementById('b-gas').value) || 0;
-      const loan = parseFloat(document.getElementById('b-loan-req').value) || 1;
-      const evic = parseFloat(document.getElementById('b-evic-val').value) || 1;
-
-      // Factors: Grid 0.28 kg/kWh, Diesel 2.68 kg/L, Gas 2.98 kg/kg
-      const s1 = ((diesel * 2.68) + (gas * 2.98)) / 1000;
-      const s2 = (kwh * 0.28) / 1000;
-      const total = s1 + s2;
-      const attr = (loan / evic) * 100;
-
-      document.getElementById('b-scope1-calc').innerText = s1.toFixed(1) + ' tCO₂e';
-      document.getElementById('b-scope2-calc').innerText = s2.toFixed(1) + ' tCO₂e';
-      document.getElementById('b-total-calc').innerText = total.toFixed(1) + ' tCO₂e';
-      document.getElementById('b-attr-preview').innerText = Math.min(attr, 100).toFixed(2) + '%';
-      
-      const entity = document.getElementById('b-entity-name').value || 'Entity';
-      document.getElementById('pass-entity').innerText = entity;
+    function quickFillAndLogin(role) {
+      document.querySelector(`input[name="auth-role"][value="${role}"]`).checked = true;
+      updateRoleStyling();
+      handleAuthSubmit(new Event('submit'));
     }
 
-    // --- PIPELINE BRIDGE: BORROWER TO BANK ---
-    function submitBorrowerToBankPool() {
-      const entity = document.getElementById('b-entity-name').value;
-      const loan = parseFloat(document.getElementById('b-loan-req').value);
-      const evic = parseFloat(document.getElementById('b-evic-val').value);
-      const kwh = parseFloat(document.getElementById('b-kwh').value) || 0;
-      const diesel = parseFloat(document.getElementById('b-diesel').value) || 0;
-      const total = (((diesel * 2.68) / 1000) + ((kwh * 0.28) / 1000)).toFixed(1);
+    function handleAuthSubmit(e) {
+      if (e) e.preventDefault();
+      const role = document.querySelector('input[name="auth-role"]:checked').value;
+      const email = document.getElementById('auth-email').value;
+      const orgName = document.getElementById('auth-org-name').value || (role === 'lender' ? 'Prime Continental Bank' : 'Rift Valley Eco-Energy Ltd');
 
-      alert(`CIREF Certification Successful!\n"${entity}" has been verified under KGT and transferred directly into the Bank Loan Portfolio with PCAF Tier 1 Data Quality.`);
+      currentUser = { email, role, org: orgName };
 
-      // Append to the Bank View
-      const list = document.getElementById('verified-borrower-list');
-      const item = document.createElement('div');
-      item.className = "p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between text-xs mt-2";
-      item.innerHTML = `
-        <div>
-          <strong class="text-emerald-950">${entity}</strong>
-          <div class="text-slate-500 font-mono">Loan: KES ${loan.toLocaleString()} | EVIC: KES ${evic.toLocaleString()}</div>
-        </div>
-        <div class="text-right">
-          <span class="px-2 py-0.5 bg-emerald-200 text-emerald-900 rounded font-bold">CIREF Verified (PCAF Tier 1)</span>
-          <div class="text-slate-800 font-semibold font-mono mt-1">Scope 1+2: ${total} tCO₂e</div>
-        </div>
-      `;
-      list.prepend(item);
+      // Hide Auth Screen, Show App
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('app-header').classList.remove('hidden');
 
-      // Automatically switch user back to Lender view to verify
-      switchUserRole('lender');
-      switchModule(1);
-      togglePCAFView('asset');
+      // Update User Info in Header
+      document.getElementById('user-display-name').innerText = email.split('@')[0];
+      document.getElementById('user-display-org').innerText = orgName;
+
+      // Direct Routing Based on Selected Role
+      switchActiveRole(role);
+      initAllCharts();
     }
 
-    // --- LENDER NAVIGATION & VIEWS ---
-    function switchModule(modId) {
-      currentModule = modId;
+    function handleLogout() {
+      currentUser = null;
+      document.getElementById('app-header').classList.add('hidden');
+      document.getElementById('lender-suite').classList.add('hidden');
+      document.getElementById('borrower-suite').classList.add('hidden');
+      document.getElementById('auth-screen').classList.remove('hidden');
+    }
+
+    // --- 4. TOP-LEVEL ROLE SWITCHER ---
+    function switchActiveRole(role) {
+      const lenderSuite = document.getElementById('lender-suite');
+      const borrowerSuite = document.getElementById('borrower-suite');
+      const lenderNav = document.getElementById('lender-nav');
+      const borrowerNav = document.getElementById('borrower-nav');
+      const roleBadge = document.getElementById('header-role-badge');
+      const pTitle = document.getElementById('header-platform-title');
+      const pSub = document.getElementById('header-platform-sub');
+      const topBtnLender = document.getElementById('top-btn-lender');
+      const topBtnBorrower = document.getElementById('top-btn-borrower');
+
+      if (role === 'lender') {
+        lenderSuite.classList.remove('hidden');
+        lenderNav.classList.remove('hidden');
+        borrowerSuite.classList.add('hidden');
+        borrowerNav.classList.add('hidden');
+
+        roleBadge.innerText = 'LENDER PORTAL';
+        roleBadge.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-brand-dark text-brand-sage border border-brand-card';
+        pTitle.innerText = 'CAPITAL ESG';
+        pSub.innerText = 'Commercial Bank Financed Emissions & Sustainability Engine';
+
+        topBtnLender.className = 'px-2.5 py-1 rounded-lg font-bold bg-brand-sage text-brand-pine transition-all';
+        topBtnBorrower.className = 'px-2.5 py-1 rounded-lg font-semibold text-slate-300 hover:text-white transition-all';
+        switchLenderTab(1);
+      } else {
+        borrowerSuite.classList.remove('hidden');
+        borrowerNav.classList.remove('hidden');
+        lenderSuite.classList.add('hidden');
+        lenderNav.classList.add('hidden');
+
+        roleBadge.innerText = 'CUSTOMER PORTAL';
+        roleBadge.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-blue-900 text-sky-300 border border-blue-700';
+        pTitle.innerText = 'CAPITAL ESG | CUSTOMER';
+        pSub.innerText = 'Project ESG Diagnostic & Investor Readiness Suite';
+
+        topBtnBorrower.className = 'px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white transition-all';
+        topBtnLender.className = 'px-2.5 py-1 rounded-lg font-semibold text-slate-300 hover:text-white transition-all';
+        switchBorrowerTab(1);
+      }
+    }
+
+    // --- 5. LENDER NAVIGATION (PAGES 1-5) ---
+    function switchLenderTab(pageId) {
+      currentLenderTab = pageId;
       for (let i = 1; i <= 5; i++) {
-        const screen = document.getElementById(`module-${i}-screen`);
-        const tab = document.getElementById(`tab-mod-${i}`);
-        if (i === modId) {
-          screen.classList.remove('hidden');
-          tab.className = "module-tab active px-3 py-1.5 text-xs font-bold rounded-md whitespace-nowrap text-white bg-brand-card shadow border-b-2 border-brand-sage";
+        const page = document.getElementById(`lender-page-${i}`);
+        const tab = document.getElementById(`l-tab-${i}`);
+        if (i === pageId) {
+          page.classList.remove('hidden');
+          tab.className = "px-3.5 py-2 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-brand-card shadow border-b-2 border-brand-sage";
         } else {
-          screen.classList.add('hidden');
-          tab.className = "module-tab px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap text-slate-300 hover:text-white hover:bg-brand-card/50";
+          page.classList.add('hidden');
+          tab.className = "px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-brand-card/50";
         }
       }
     }
 
+    // --- 6. BORROWER NAVIGATION (PAGES 1-4) ---
+    function switchBorrowerTab(pageId) {
+      currentBorrowerTab = pageId;
+      for (let i = 1; i <= 4; i++) {
+        const page = document.getElementById(`borrower-page-${i}`);
+        const tab = document.getElementById(`b-tab-${i}`);
+        if (i === pageId) {
+          page.classList.remove('hidden');
+          tab.className = "px-3.5 py-2 text-xs font-bold rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-white bg-blue-800 shadow border-b-2 border-sky-400";
+        } else {
+          page.classList.add('hidden');
+          tab.className = "px-3.5 py-2 text-xs font-medium rounded-md whitespace-nowrap transition-all flex items-center space-x-2 text-blue-200 hover:text-white hover:bg-blue-900/60";
+        }
+      }
+      recalcCustomerMetrics();
+    }
+
+    // --- 7. BORROWER CALCULATIONS & TRANSMISSION ---
+    function recalcCustomerMetrics() {
+      const kwh = parseFloat(document.getElementById('cust-kwh').value) || 0;
+      const diesel = parseFloat(document.getElementById('cust-diesel').value) || 0;
+      const lpg = parseFloat(document.getElementById('cust-lpg').value) || 0;
+      const loan = parseFloat(document.getElementById('cust-loan-amount').value) || 1;
+      const evic = parseFloat(document.getElementById('cust-evic-amount').value) || 1;
+
+      // Factors: Grid 0.28 kg/kWh, Diesel 2.68 kg/L, LPG 2.98 kg/kg
+      const s1 = ((diesel * 2.68) + (lpg * 2.98)) / 1000;
+      const s2 = (kwh * 0.28) / 1000;
+      const total = s1 + s2;
+      const attr = Math.min((loan / evic) * 100, 100);
+      const financed = (attr / 100) * total;
+
+      document.getElementById('cust-scope1-res').innerText = s1.toFixed(1) + ' tCO₂e';
+      document.getElementById('cust-scope2-res').innerText = s2.toFixed(1) + ' tCO₂e';
+      document.getElementById('cust-total-res').innerText = total.toFixed(1) + ' tCO₂e';
+      document.getElementById('cust-attr-preview').innerText = attr.toFixed(2) + '%';
+
+      // Update Passport Page Displays
+      const entity = document.getElementById('cust-entity-name').value;
+      const sector = document.getElementById('cust-sector').value;
+      document.getElementById('pass-display-name').innerText = entity;
+      document.getElementById('pass-display-sector').innerText = `Sector: ${sector} | Kenya`;
+      document.getElementById('pass-total-ghg').innerText = total.toFixed(1) + ' tCO₂e';
+      document.getElementById('pass-attr-ghg').innerText = financed.toFixed(1) + ' tCO₂e';
+    }
+
+    function submitCustomerDataToBank() {
+      const entity = document.getElementById('cust-entity-name').value;
+      const sector = document.getElementById('cust-sector').value;
+      const loan = parseFloat(document.getElementById('cust-loan-amount').value);
+      const evic = parseFloat(document.getElementById('cust-evic-amount').value);
+      const kwh = parseFloat(document.getElementById('cust-kwh').value) || 0;
+      const diesel = parseFloat(document.getElementById('cust-diesel').value) || 0;
+      const lpg = parseFloat(document.getElementById('cust-lpg').value) || 0;
+      
+      const s1 = ((diesel * 2.68) + (lpg * 2.98)) / 1000;
+      const s2 = (kwh * 0.28) / 1000;
+      const total = s1 + s2;
+      const attr = (loan / evic);
+      const financed = attr * total;
+
+      alert(`Transmission Successful!\n"${entity}" has been verified under KGT and synchronized directly into the Bank Financed Portfolio Ledger with PCAF Tier 1 Data Quality.`);
+
+      // Append dynamically into Lender's Direct Asset Ledger
+      const ledger = document.getElementById('verified-borrower-ledger');
+      const row = document.createElement('div');
+      row.className = "bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between text-xs";
+      row.innerHTML = `
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded">Category 1: Corporate</span>
+            <span class="font-bold text-slate-900">${entity}</span>
+            <span class="text-slate-400 font-mono">(${sector})</span>
+          </div>
+          <div class="text-slate-500 font-mono mt-1">
+            Loan: KES ${loan.toLocaleString()} | EVIC: KES ${evic.toLocaleString()} | Attribution: ${(attr * 100).toFixed(2)}%
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="font-bold text-emerald-700 font-mono">${financed.toFixed(1)} tCO₂e Financed</div>
+          <span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 text-[10px] font-bold">PCAF Tier 1 Primary</span>
+        </div>
+      `;
+      ledger.prepend(row);
+
+      // Automatically transition to Lender View to observe the synced result
+      switchActiveRole('lender');
+      switchLenderTab(1);
+      togglePCAFView('asset');
+    }
+
+    // --- 8. LENDER PORTFOLIO RENDERING & CHARTS ---
     function togglePCAFView(view) {
-      const sec = document.getElementById('pcaf-sector-view');
-      const ast = document.getElementById('pcaf-asset-view');
+      const sec = document.getElementById('pcaf-sub-sector');
+      const ast = document.getElementById('pcaf-sub-asset');
       const bSec = document.getElementById('pcaf-btn-sector');
       const bAst = document.getElementById('pcaf-btn-asset');
       if (view === 'sector') {
@@ -715,36 +1195,54 @@
 
     function setCurrency(curr) {
       currentCurrency = curr;
-      document.getElementById('curr-kes').className = curr === 'KES' ? "px-2 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage" : "px-2 py-0.5 rounded font-semibold text-slate-300 hover:text-white";
-      document.getElementById('curr-usd').className = curr === 'USD' ? "px-2 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage" : "px-2 py-0.5 rounded font-semibold text-slate-300 hover:text-white";
+      document.getElementById('curr-kes').className = curr === 'KES' ? "px-2.5 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage transition-all" : "px-2.5 py-0.5 rounded font-semibold text-slate-300 hover:text-white transition-all";
+      document.getElementById('curr-usd').className = curr === 'USD' ? "px-2.5 py-0.5 rounded font-semibold text-brand-pine bg-brand-sage transition-all" : "px-2.5 py-0.5 rounded font-semibold text-slate-300 hover:text-white transition-all";
       renderSectorTable();
     }
 
     function openIngestionModal() { document.getElementById('ingest-modal').classList.remove('hidden'); }
     function closeIngestionModal() { document.getElementById('ingest-modal').classList.add('hidden'); }
 
-    function commitNewFacility() {
-      const name = document.getElementById('m-name').value || 'New Loan Facility';
+    function commitManualFacility() {
+      const name = document.getElementById('m-name').value || 'New Credit Facility';
       const loan = parseFloat(document.getElementById('m-loan').value) || 1000000;
       const evic = parseFloat(document.getElementById('m-evic').value) || 10000000;
       const emis = parseFloat(document.getElementById('m-emiss').value) || 5000;
       const attr = loan / evic;
       const financed = attr * emis;
 
-      alert(`Facility "${name}" appended to portfolio!\nAttribution: ${(attr * 100).toFixed(2)}%\nFinanced: ${financed.toFixed(1)} tCO2e`);
+      alert(`Manual Ingestion Complete!\nFacility "${name}" appended with ${(attr * 100).toFixed(2)}% attribution and ${financed.toFixed(1)} tCO2e financed carbon footprint.`);
       closeIngestionModal();
     }
 
-    function handlePrimaryAction() {
-      if (currentRole === 'lender') {
-        alert("Downloading Consolidated Bank Supervisory ESG Audit Package (CBK, PCAF, KGT, ISSB).");
+    function runKGTScreening() {
+      const deal = document.getElementById('kgt-deal-name').value || 'Proposed Deal';
+      const sc = document.getElementById('chk-sc').checked;
+      const dnsh = document.getElementById('chk-dnsh').checked;
+      const mss = document.getElementById('chk-mss').checked;
+
+      if (sc && dnsh && mss) {
+        alert(`Deal "${deal}" fully complies with KGT Technical Screening Criteria, DNSH verification, and MSS safeguards. Added to Bank Green Asset Ratio (GAR).`);
       } else {
-        alert("Downloading Official CIREF Digital ESG Compliance Passport.");
+        alert(`Deal "${deal}" does not satisfy all KGT statutory pillars (Substantial Contribution, DNSH, and Minimum Safeguards).`);
       }
     }
 
-    function downloadPassport() {
-      alert("CIREF ESG Compliance Passport & Bankability Dossier generated as PDF.");
+    function updateStressTest(val) {
+      document.getElementById('tax-val').innerText = `$${val} / tCO₂e`;
+      const mult = val / 50;
+      document.getElementById('stress-npl').innerText = `+${(1.85 * mult).toFixed(2)}%`;
+      document.getElementById('stress-cap').innerText = `KES ${Math.round(820 * mult)}M`;
+    }
+
+    function setISSBScenario(scen) {
+      if (scen === '1.5') {
+        document.getElementById('btn-scen-15').className = "px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-semibold shadow-xs";
+        document.getElementById('btn-scen-20').className = "px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg font-semibold hover:bg-slate-200";
+      } else {
+        document.getElementById('btn-scen-20').className = "px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-semibold shadow-xs";
+        document.getElementById('btn-scen-15').className = "px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg font-semibold hover:bg-slate-200";
+      }
     }
 
     function exportSectorTableCSV() {
@@ -758,6 +1256,122 @@
       a.setAttribute('href', url);
       a.setAttribute('download', 'PCAF_Financed_Emissions.csv');
       a.click();
+    }
+
+    // --- 9. CHART.JS INITIALIZATIONS ---
+    function initAllCharts() {
+      renderSectorTable();
+
+      // Sector Bar Chart
+      const ctxBar = document.getElementById('sectorComparisonChart').getContext('2d');
+      if (sectorBarChart) sectorBarChart.destroy();
+      sectorBarChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: sectorData.map(s => s.sector),
+          datasets: [
+            { label: 'Bank Loan Exposure (KES M)', data: sectorData.map(s => Math.round(s.loanExp / 1e6)), backgroundColor: '#10B981', borderRadius: 4, yAxisID: 'y' },
+            { label: 'Financed Emissions (tCO₂e)', data: sectorData.map(s => Math.round(s.financed)), backgroundColor: '#0A3A2A', borderRadius: 4, yAxisID: 'y1' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { position: 'left', title: { display: true, text: 'KES Millions' } },
+            y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'tCO₂e' } }
+          }
+        }
+      });
+
+      // Sector Donut Chart
+      const ctxDonut = document.getElementById('sectorShareDonut').getContext('2d');
+      if (sectorDonutChart) sectorDonutChart.destroy();
+      sectorDonutChart = new Chart(ctxDonut, {
+        type: 'doughnut',
+        data: {
+          labels: sectorData.map(s => s.sector),
+          datasets: [{
+            data: sectorData.map(s => (s.pct * 100).toFixed(1)),
+            backgroundColor: ['#10B981', '#0EA5E9', '#F59E0B', '#6366F1', '#EC4899', '#84CC16', '#14B8A6', '#F43F5E', '#A855F7', '#64748B']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      // KGT Bar Chart
+      const ctxKgt = document.getElementById('kgtChart').getContext('2d');
+      if (kgtChartInstance) kgtChartInstance.destroy();
+      kgtChartInstance = new Chart(ctxKgt, {
+        type: 'bar',
+        data: {
+          labels: ['Renewable Energy', 'Climate-Smart Agri', 'Green Buildings', 'Clean Transport', 'Water / Waste'],
+          datasets: [
+            { label: 'Eligible Volume (KES B)', data: [4.2, 3.1, 2.5, 2.2, 2.2], backgroundColor: '#BAE6FD' },
+            { label: 'KGT Aligned (GAR) (KES B)', data: [3.8, 2.4, 1.8, 1.6, 1.36], backgroundColor: '#0284C7' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      // CBK Hazard Chart
+      const ctxCbk = document.getElementById('cbkRiskChart').getContext('2d');
+      if (cbkChartInstance) cbkChartInstance.destroy();
+      cbkChartInstance = new Chart(ctxCbk, {
+        type: 'bar',
+        data: {
+          labels: ['Turkana / Garissa (Drought)', 'Lake Victoria Basin (Floods)', 'Coastal Belt (Inundation)', 'Nairobi Hub (Transition)'],
+          datasets: [
+            { label: 'Loan Book at Risk (KES B)', data: [5.4, 4.2, 3.1, 8.8], backgroundColor: '#F59E0B' },
+            { label: 'ECL Buffer (KES B)', data: [0.8, 0.6, 0.4, 1.1], backgroundColor: '#EF4444' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      // ISSB Line Chart
+      const ctxIssb = document.getElementById('issbChart').getContext('2d');
+      if (issbChartInstance) issbChartInstance.destroy();
+      issbChartInstance = new Chart(ctxIssb, {
+        type: 'line',
+        data: {
+          labels: ['2025 Baseline', '2030 Interim', '2035', '2040', '2045', '2050 Net-Zero'],
+          datasets: [
+            { label: '1.5°C Orderly SBTi Curve', data: [2623334, 1800000, 1100000, 600000, 200000, 0], borderColor: '#10B981', borderDash: [4, 4], fill: false },
+            { label: 'Current Financed Projection', data: [2623334, 2100000, 1600000, 1200000, 800000, 450000], borderColor: '#6366F1', fill: false }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      // GRI Materiality Scatter Chart
+      const ctxGri = document.getElementById('griMaterialityChart').getContext('2d');
+      if (griChartInstance) griChartInstance.destroy();
+      griChartInstance = new Chart(ctxGri, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Material Topics',
+            data: [
+              { x: 8.5, y: 9.2, label: 'Financed GHG Footprint' },
+              { x: 9.0, y: 8.0, label: 'Financial Inclusion & SME Lending' },
+              { x: 6.0, y: 8.5, label: 'Climate Resilience in Agriculture' },
+              { x: 7.5, y: 6.0, label: 'Gender Diversity & Equal Pay' },
+              { x: 4.5, y: 7.0, label: 'Paper & Internal Energy' }
+            ],
+            backgroundColor: '#F43F5E',
+            pointRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { min: 0, max: 10, title: { display: true, text: 'Financial Materiality (Outside-In)' } },
+            y: { min: 0, max: 10, title: { display: true, text: 'Impact Materiality (Inside-Out)' } }
+          }
+        }
+      });
     }
   </script>
 </body>
